@@ -1,0 +1,39 @@
+---
+const navLinks = [
+  { name: 'Home', url: '/' },
+  { name: 'Blog', url: '/blog' },
+  { name: 'Tags', url: '/tags' },
+  { name: 'About', url: '/about' },
+];
+
+const currentPath = Astro.url.pathname;
+---
+
+<nav class="sticky top-0 z-50 w-full backdrop-blur-md bg-gray-900/80 border-b border-gray-800 transition-all duration-300">
+  <div class="max-w-4xl mx-auto px-6 h-16 flex items-center justify-between">
+    <a href="/" class="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-emerald-400" transition:persist>
+      DevBlog
+    </a>
+    
+    <div class="hidden md:flex gap-6">
+      {navLinks.map((link) => {
+        const isActive = currentPath === link.url || (link.url !== '/' && currentPath.startsWith(link.url));
+        return (
+          <a
+            href={link.url}
+            class={`text-sm font-medium transition-colors hover:text-white ${isActive ? 'text-white' : 'text-gray-400'}`}
+          >
+            {link.name}
+          </a>
+        );
+      })}
+    </div>
+
+    <!-- Mobile Menu Button (Simple version for now) -->
+    <button class="md:hidden text-gray-400 hover:text-white" aria-label="Menu">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+      </svg>
+    </button>
+  </div>
+</nav>

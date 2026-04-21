@@ -1,0 +1,25 @@
+---
+interface Props {
+  tag: string;
+  count?: number;
+  size?: 'sm' | 'md' | 'lg';
+}
+
+const { tag, count, size = 'sm' } = Astro.props;
+
+const sizeClasses = {
+  sm: 'text-xs px-2.5 py-1',
+  md: 'text-sm px-3 py-1.5',
+  lg: 'text-base px-4 py-2',
+};
+---
+
+<a
+  href={`/tags/${tag}`}
+  class={`inline-flex items-center gap-1.5 font-medium text-emerald-400/80 bg-emerald-900/20 rounded hover:bg-emerald-900/40 hover:text-emerald-300 transition-colors border border-emerald-800/30 ${sizeClasses[size]}`}
+>
+  <span>#{tag}</span>
+  {count !== undefined && (
+    <span class="text-emerald-500/60 ml-1">({count})</span>
+  )}
+</a>

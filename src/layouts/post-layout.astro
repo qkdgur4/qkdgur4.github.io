@@ -1,0 +1,94 @@
+---
+import BaseLayout from './base-layout.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  pubDate: Date;
+  updatedDate?: Date;
+  category: string;
+  tags: string[];
+  heroImage?: string;
+}
+
+const { title, description, pubDate, updatedDate, category, tags, heroImage } = Astro.props;
+
+const formattedDate = pubDate.toLocaleDateString('ko-KR', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+
+const formattedUpdatedDate = updatedDate?.toLocaleDateString('ko-KR', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+---
+
+<BaseLayout title={`${title} | DevBlog`} description={description}>
+  <article class="py-8">
+    <!-- Post Header -->
+    <header class="mb-10">
+      <div class="flex items-center gap-3 mb-4 text-sm">
+        <a
+          href={`/blog/category/${category.toLowerCase()}`}
+          class="text-blue-400 bg-blue-900/30 px-3 py-1 rounded-full hover:bg-blue-900/50 transition-colors"
+        >
+          {category}
+        </a>
+        <time datetime={pubDate.toISOString()} class="text-gray-400">
+          {formattedDate}
+        </time>
+        {updatedDate && (
+          <span class="text-gray-500 text-xs">
+            (수정: {formattedUpdatedDate})
+          </span>
+        )}
+      </div>
+
+      <h1 class="text-3xl md:text-4xl font-extrabold leading-tight mb-4" transition:name={`post-title-${title}`}>
+        {title}
+      </h1>
+
+      <p class="text-gray-400 text-lg">{description}</p>
+
+      <!-- Tags -->
+      <div class="flex flex-wrap gap-2 mt-6">
+        {tags.map((tag) => (
+          <a
+            href={`/tags/${tag}`}
+            class="text-xs text-gray-300 bg-gray-800 border border-gray-700 px-2.5 py-1 rounded-md hover:border-blue-500 hover:text-blue-400 transition-colors"
+          >
+            #{tag}
+          </a>
+        ))}
+      </div>
+    </header>
+
+    <!-- Post Body -->
+    <div class="prose prose-invert prose-lg max-w-none
+                prose-headings:font-bold prose-headings:text-gray-100
+                prose-a:text-blue-400 prose-a:no-underline hover:prose-a:underline
+                prose-code:text-emerald-400 prose-code:bg-gray-800 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:before:content-none prose-code:after:content-none
+                prose-pre:bg-gray-950 prose-pre:border prose-pre:border-gray-800 prose-pre:rounded-lg
+                prose-blockquote:border-blue-500 prose-blockquote:text-gray-300
+                prose-strong:text-gray-100
+                prose-img:rounded-lg">
+      <slot />
+    </div>
+
+    <!-- Back to Blog -->
+    <div class="mt-16 pt-8 border-t border-gray-800">
+      <a
+        href="/blog"
+        class="text-blue-400 hover:text-blue-300 transition-colors inline-flex items-center gap-2"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+        </svg>
+        전체 글 목록으로 돌아가기
+      </a>
+    </div>
+  </article>
+</BaseLayout>

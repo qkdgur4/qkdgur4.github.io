@@ -1,0 +1,39 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/base-layout.astro';
+import TagBadge from '../../components/tag-badge.astro';
+
+// Get all posts
+const posts = await getCollection('blog', ({ data }) => !data.draft);
+
+// Calculate tag counts
+const tagCounts = posts.reduce((acc, post) => {
+  post.data.tags.forEach((tag) => {
+    acc[tag] = (acc[tag] || 0) + 1;
+  });
+  return acc;
+}, {} as Record<string, number>);
+
+// Sort tags by count (descending), then alphabetically
+const sortedTags = Object.keys(tagCounts).sort((a, b) => {
+  if (tagCounts[b] === tagCounts[a]) {
+    return a.localeCompare(b);
+  }
+  return tagCounts[b] - tagCounts[a];
+});
+---
+
+<BaseLayout title="Tags | DevBlog" description="Explore all blog tags and topics.">
+  <div class="py-12 max-w-3xl mx-auto text-center">
+    <header class="mb-12">
+      <h1 class="text-4xl font-extrabold text-white mb-4">Tags</h1>
+      <p class="text-gray-400 text-lg">Browse topics by tags</p>
+    </header>
+
+    <div class="flex flex-wrap justify-center gap-4">
+      {sortedTags.map((tag) => (
+        <TagBadge tag={tag} count={tagCounts[tag]} size="lg" />
+      ))}
+    </div>
+  </div>
+</BaseLayout>

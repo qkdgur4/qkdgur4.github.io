@@ -1,0 +1,45 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../../layouts/base-layout.astro';
+import PostCard from '../../../components/post-card.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog', ({ data }) => !data.draft);
+  const categories = [...new Set(posts.map((post) => post.data.category))];
+
+  return categories.map((category) => {
+    const categoryPosts = posts.filter((post) => post.data.category === category);
+    return {
+      params: { category: category.toLowerCase() },
+      props: { 
+        categoryName: category,
+        posts: categoryPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()) 
+      },
+    };
+  });
+}
+
+const { categoryName, posts } = Astro.props;
+---
+
+<BaseLayout title={`${categoryName} Posts | DevBlog`} description={`All posts in the ${categoryName} category.`}>
+  <div class="py-12">
+    <header class="mb-12">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-900/30 text-blue-400 text-sm font-medium mb-4">
+        Category
+      </div>
+      <h1 class="text-4xl font-extrabold text-white mb-4">{categoryName}</h1>
+      <p class="text-gray-400 text-lg">{posts.length} articles found.</p>
+    </header>
+
+    <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      {posts.map((post) => (
+        <PostCard post={post} />
+      ))}
+    </div>
+
+    <div class="mt-12 text-center">
+      <a href="/blog" class="text-blue-400 hover:underline">← Back to all posts</a>
+    </div>
+  </div>
+</BaseLayout>

@@ -1,0 +1,20 @@
+---
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="w-full max-w-4xl mx-auto px-6 py-12 mt-20 border-t border-gray-800">
+  <div class="flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-gray-500">
+    <div>
+      © {currentYear} DevBlog. Built with 
+      <a href="https://astro.build" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white transition-colors">Astro</a>
+      & 
+      <a href="https://tailwindcss.com" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white transition-colors">Tailwind CSS</a>.
+    </div>
+    
+    <div class="flex gap-6">
+      <a href="/rss.xml" class="hover:text-white transition-colors">RSS</a>
+      <a href="https://github.com/username" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">GitHub</a>
+      <a href="https://linkedin.com/in/username" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">LinkedIn</a>
+    </div>
+  </div>
+</footer>

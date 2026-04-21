@@ -1,0 +1,35 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/base-layout.astro';
+import HeroSection from '../components/hero-section.astro';
+import PostCard from '../components/post-card.astro';
+
+// Get all posts and sort them by date (newest first)
+const posts = await getCollection('blog', ({ data }) => !data.draft);
+const sortedPosts = posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+const recentPosts = sortedPosts.slice(0, 3);
+---
+
+<BaseLayout title="DevOps Engineer Portfolio" description="Building scalable cloud architecture and sharing technical insights.">
+  <HeroSection />
+
+  <section class="mt-16">
+    <div class="flex items-center justify-between mb-8">
+      <h2 class="text-2xl font-bold text-white flex items-center gap-2">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
+        </svg>
+        Recent Posts
+      </h2>
+      <a href="/blog" class="text-sm text-blue-400 hover:text-emerald-400 transition-colors font-medium">
+        View all posts →
+      </a>
+    </div>
+
+    <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      {recentPosts.map((post) => (
+        <PostCard post={post} />
+      ))}
+    </div>
+  </section>
+</BaseLayout>
