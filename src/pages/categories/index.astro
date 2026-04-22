@@ -1,0 +1,47 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/base-layout.astro';
+
+const posts = await getCollection('blog', ({ data }) => !data.draft);
+
+// Group posts by Category
+const categoryCounts = posts.reduce((acc, post) => {
+  const category = post.data.category;
+  if (!acc[category]) {
+    acc[category] = 0;
+  }
+  acc[category]++;
+  return acc;
+}, {} as Record<string, number>);
+
+const categories = Object.keys(categoryCounts).sort();
+---
+
+<BaseLayout title="Categories | DevBlog" description="Browse articles by category." sideBarActiveItemID="categories">
+  <div class="py-12">
+    <header class="mb-12">
+      <h1 class="text-4xl font-extrabold text-gray-900 dark:text-white mb-4 transition-colors">Categories</h1>
+      <p class="text-gray-600 dark:text-gray-400 text-lg transition-colors">Browse articles by category.</p>
+    </header>
+
+    <div class="grid gap-4 sm:grid-cols-2">
+      {categories.map((category) => (
+        <a href={`/blog/category/${category.toLowerCase()}`} class="group flex items-center justify-between p-5 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl hover:border-blue-500 dark:hover:border-blue-500/50 hover:shadow-md transition-all duration-300">
+          <div class="flex items-center gap-4">
+            <div class="w-10 h-10 flex items-center justify-center rounded-lg bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 transition-colors">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z" />
+              </svg>
+            </div>
+            <h2 class="text-lg font-bold text-gray-800 dark:text-gray-200 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+              {category}
+            </h2>
+          </div>
+          <span class="flex items-center justify-center min-w-[2rem] px-2 h-8 rounded-full bg-gray-100 dark:bg-gray-700 text-sm font-semibold text-gray-600 dark:text-gray-300 transition-colors">
+            {categoryCounts[category]}
+          </span>
+        </a>
+      ))}
+    </div>
+  </div>
+</BaseLayout>

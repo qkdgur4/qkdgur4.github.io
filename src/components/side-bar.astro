@@ -18,22 +18,14 @@ const inactiveClass = "text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:h
   </div>
 
   <!-- Navigation Links -->
-  <nav class="flex-1 w-full space-y-2 font-medium">
-    <a href="/" class={`block px-4 py-3 rounded-lg ${sideBarActiveItemID === 'home' ? activeClass : inactiveClass}`}>
-      Home
-    </a>
-    <a href="/projects" class={`block px-4 py-3 rounded-lg ${sideBarActiveItemID === 'projects' ? activeClass : inactiveClass}`}>
-      Projects
-    </a>
-    <a href="/blog" class={`block px-4 py-3 rounded-lg ${sideBarActiveItemID === 'blog' ? activeClass : inactiveClass}`}>
-      Blog
-    </a>
-    <a href="/tags" class={`block px-4 py-3 rounded-lg ${sideBarActiveItemID === 'tags' ? activeClass : inactiveClass}`}>
-      Tags
-    </a>
-    <a href="/about" class={`block px-4 py-3 rounded-lg ${sideBarActiveItemID === 'about' ? activeClass : inactiveClass}`}>
-      About
-    </a>
+  <nav class="flex flex-col space-y-2 text-base font-medium transition-colors">
+    <a href="/" class={`px-4 py-3 rounded-xl ${sideBarActiveItemID === 'home' ? activeClass : inactiveClass}`}>Home</a>
+    <a href="/projects" class={`px-4 py-3 rounded-xl ${sideBarActiveItemID === 'projects' ? activeClass : inactiveClass}`}>Projects</a>
+    <a href="/blog" class={`px-4 py-3 rounded-xl ${sideBarActiveItemID === 'blog' ? activeClass : inactiveClass}`}>Blog</a>
+    <a href="/categories" class={`px-4 py-3 rounded-xl ${sideBarActiveItemID === 'categories' ? activeClass : inactiveClass}`}>Categories</a>
+    <a href="/archives" class={`px-4 py-3 rounded-xl ${sideBarActiveItemID === 'archives' ? activeClass : inactiveClass}`}>Archives</a>
+    <a href="/tags" class={`px-4 py-3 rounded-xl ${sideBarActiveItemID === 'tags' ? activeClass : inactiveClass}`}>Tags</a>
+    <a href="/about" class={`px-4 py-3 rounded-xl ${sideBarActiveItemID === 'about' ? activeClass : inactiveClass}`}>About</a>
   </nav>
 
   <!-- Social Links -->
