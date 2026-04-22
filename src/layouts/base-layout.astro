@@ -4,6 +4,7 @@ import SeoHead from '../components/seo-head.astro';
 import SideBar from '../components/side-bar.astro';
 import Footer from '../components/footer.astro';
 import TopRightHeader from '../components/top-right-header.astro';
+import SearchModal from '../components/search-modal.astro';
 import '../styles/global.css';
 
 interface Props {
@@ -83,6 +84,7 @@ const { title, description, sideBarActiveItemID = 'home' } = Astro.props;
       <Footer />
     </div>
 
+    <SearchModal />
     <script>
       const btn = document.getElementById('mobile-menu-btn');
       const closeBtn = document.getElementById('mobile-close-btn');
