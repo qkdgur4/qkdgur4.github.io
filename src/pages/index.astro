@@ -1,8 +1,8 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/base-layout.astro';
-import HeroSection from '../components/hero-section.astro';
 import PostCard from '../components/post-card.astro';
+import HorizontalCard from '../components/horizontal-card.astro';
 
 // Get all posts and sort them by date (newest first)
 const posts = await getCollection('blog', ({ data }) => !data.draft);
@@ -10,23 +10,74 @@ const sortedPosts = posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDa
 const recentPosts = sortedPosts.slice(0, 3);
 ---
 
-<BaseLayout title="DevOps Engineer Portfolio" description="Building scalable cloud architecture and sharing technical insights.">
-  <HeroSection />
+<BaseLayout title="Manuel Ernesto | Portfolio" description="Software Engineer and Entrepreneur" sideBarActiveItemID="home">
+  <!-- Hero Section -->
+  <div class="pb-12 mt-5">
+    <div class="text-xl py-1 text-gray-400 font-medium tracking-wide">Hey there 👋</div>
+    <div class="text-5xl lg:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400 my-2">
+      I'm Manuel Ernesto
+    </div>
+    <div class="text-2xl lg:text-3xl py-3 font-bold text-white">
+      Software Engineer and Entrepreneur
+    </div>
+    <div class="py-4">
+      <p class="text-lg text-gray-400 max-w-2xl leading-relaxed">
+        This is a premium hybrid portfolio built with <b>Astro 6</b> and <b>Tailwind CSS v4</b>. 
+        It combines beautiful glassmorphism gradients with a solid sidebar UX to present projects and technical articles effectively.
+      </p>
+    </div>
+    <div class="mt-8 flex gap-4">
+      <a href="mailto:contact@example.com" class="px-6 py-3 rounded-lg bg-blue-600 hover:bg-blue-500 text-white font-semibold transition-colors shadow-lg shadow-blue-500/20">
+        Let's connect!
+      </a>
+      <a href="https://github.com/qkdgur4" target="_blank" class="px-6 py-3 rounded-lg bg-gray-800 hover:bg-gray-700 text-white font-semibold transition-colors border border-gray-700">
+        GitHub Profile
+      </a>
+    </div>
+  </div>
 
-  <section class="mt-16">
+  <div class="border-b border-gray-800 my-8"></div>
+
+  <!-- Projects Section (Horizontal) -->
+  <section class="mb-12">
     <div class="flex items-center justify-between mb-8">
-      <h2 class="text-2xl font-bold text-white flex items-center gap-2">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
-        </svg>
-        Recent Posts
+      <h2 class="text-3xl font-bold text-white flex items-center gap-3">
+        My last projects {"</>"}
+      </h2>
+    </div>
+
+    <div class="space-y-6">
+      <HorizontalCard
+        title="Seoul Simulator"
+        img="https://images.unsplash.com/photo-1517430816045-df4b7de11d1d?w=800&q=80"
+        desc="A massive concurrent simulation engine for Mapo-gu franchise analysis using LangGraph and AWS RDS."
+        url="#"
+        badge="NEW"
+      />
+      <HorizontalCard
+        title="Slime Factory"
+        img="https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=800&q=80"
+        desc="A hyper-casual mobile game with optimized backend infrastructure to reduce AWS operational costs by 80%."
+        url="#"
+        badge="FOSS"
+      />
+    </div>
+  </section>
+
+  <div class="border-b border-gray-800 my-12"></div>
+
+  <!-- Blog Section (Grid) -->
+  <section class="mb-12">
+    <div class="flex items-center justify-between mb-8">
+      <h2 class="text-3xl font-bold text-white">
+        Latest from blog
       </h2>
       <a href="/blog" class="text-sm text-blue-400 hover:text-emerald-400 transition-colors font-medium">
         View all posts →
       </a>
     </div>
 
-    <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+    <div class="grid gap-6 lg:grid-cols-2">
       {recentPosts.map((post) => (
         <PostCard post={post} />
       ))}

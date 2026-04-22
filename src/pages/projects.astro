@@ -1,0 +1,36 @@
+---
+import BaseLayout from '../layouts/base-layout.astro';
+import HorizontalCard from '../components/horizontal-card.astro';
+---
+
+<BaseLayout title="Projects | DevBlog" description="A collection of my recent projects and open source contributions." sideBarActiveItemID="projects">
+  <div class="py-12">
+    <header class="mb-12">
+      <h1 class="text-4xl font-extrabold text-white mb-4">Projects</h1>
+      <p class="text-xl text-gray-400">A collection of my recent work and open source contributions.</p>
+    </header>
+
+    <div class="space-y-6">
+      <HorizontalCard
+        title="Seoul Simulator"
+        img="https://images.unsplash.com/photo-1517430816045-df4b7de11d1d?w=800&q=80"
+        desc="A massive concurrent simulation engine for Mapo-gu franchise analysis using LangGraph and AWS RDS."
+        url="#"
+        badge="NEW"
+      />
+      <HorizontalCard
+        title="Slime Factory"
+        img="https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=800&q=80"
+        desc="A hyper-casual mobile game with optimized backend infrastructure to reduce AWS operational costs by 80%."
+        url="#"
+        badge="FOSS"
+      />
+      <HorizontalCard
+        title="DevBlog Template"
+        img="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&q=80"
+        desc="A premium Astro 6 + Tailwind CSS v4 blog template featuring glassmorphism and view transitions."
+        url="https://github.com/qkdgur4/qkdgur4.github.io"
+      />
+    </div>
+  </div>
+</BaseLayout>

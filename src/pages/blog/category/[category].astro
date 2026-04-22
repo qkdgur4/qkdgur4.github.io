@@ -22,7 +22,7 @@ export async function getStaticPaths() {
 const { categoryName, posts } = Astro.props;
 ---
 
-<BaseLayout title={`${categoryName} Posts | DevBlog`} description={`All posts in the ${categoryName} category.`}>
+<BaseLayout title={`${categoryName} Posts | DevBlog`} description={`All posts in the ${categoryName} category.`} sideBarActiveItemID="blog">
   <div class="py-12">
     <header class="mb-12">
       <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-900/30 text-blue-400 text-sm font-medium mb-4">
