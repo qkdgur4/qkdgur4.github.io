@@ -20,16 +20,19 @@ export async function getStaticPaths() {
 }
 
 const { categoryName, posts } = Astro.props;
+const category = categoryName;
 ---
 
-<BaseLayout title={`${categoryName} Posts | DevBlog`} description={`All posts in the ${categoryName} category.`} sideBarActiveItemID="blog">
+<BaseLayout title={`Posts in ${category} | DevBlog`} description={`All posts in the ${category} category.`} sideBarActiveItemID="blog">
   <div class="py-12">
-    <header class="mb-12">
-      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-900/30 text-blue-400 text-sm font-medium mb-4">
-        Category
+    <header class="mb-12 text-center">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 text-sm font-medium mb-4 transition-colors">
+        <span>Category</span>
       </div>
-      <h1 class="text-4xl font-extrabold text-white mb-4">{categoryName}</h1>
-      <p class="text-gray-400 text-lg">{posts.length} articles found.</p>
+      <h1 class="text-4xl font-extrabold text-gray-900 dark:text-white mb-4 transition-colors">{category}</h1>
+      <p class="text-gray-600 dark:text-gray-400 transition-colors">
+        Found <span class="text-blue-600 dark:text-blue-400 font-bold">{posts.length}</span> posts in this category.
+      </p>
     </header>
 
     <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">

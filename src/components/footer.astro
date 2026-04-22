@@ -2,19 +2,18 @@
 const currentYear = new Date().getFullYear();
 ---
 
-<footer class="w-full max-w-4xl mx-auto px-6 py-12 mt-20 border-t border-gray-800">
-  <div class="flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-gray-500">
+<footer class="w-full mt-20 py-8 border-t border-gray-200 dark:border-gray-800 transition-colors">
+  <div class="flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-gray-500 dark:text-gray-400 transition-colors">
     <div>
       © {currentYear} DevBlog. Built with 
-      <a href="https://astro.build" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white transition-colors">Astro</a>
+      <a href="https://astro.build" target="_blank" rel="noopener noreferrer" class="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Astro</a>
       & 
-      <a href="https://tailwindcss.com" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white transition-colors">Tailwind CSS</a>.
+      <a href="https://tailwindcss.com" target="_blank" rel="noopener noreferrer" class="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Tailwind CSS</a>.
     </div>
     
     <div class="flex gap-6">
-      <a href="/rss.xml" class="hover:text-white transition-colors">RSS</a>
-      <a href="https://github.com/username" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">GitHub</a>
-      <a href="https://linkedin.com/in/username" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">LinkedIn</a>
+      <a href="/rss.xml" class="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">RSS</a>
+      <a href="https://github.com/qkdgur4" target="_blank" rel="noopener noreferrer" class="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">GitHub</a>
     </div>
   </div>
 </footer>
