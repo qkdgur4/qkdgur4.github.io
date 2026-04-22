@@ -47,126 +47,143 @@
 </div>
 
 <script>
-  let searchData = null;
-  const searchModal = document.getElementById('search-modal');
-  const searchBackdrop = document.getElementById('search-backdrop');
-  const searchInput = document.getElementById('search-input');
-  const searchResults = document.getElementById('search-results');
-  const searchEmpty = document.getElementById('search-empty');
-  const searchCloseBtn = document.getElementById('search-close-btn');
-
-  // Fetch search data only once
-  async function fetchSearchData() {
-    if (searchData) return;
-    try {
-      const res = await fetch('/api/search.json');
-      searchData = await res.json();
-    } catch (e) {
-      console.error('Failed to fetch search data', e);
-    }
+  // Declare a global variable to cache search data across page transitions
+  if (typeof window.searchDataCache === 'undefined') {
+    window.searchDataCache = null;
   }
 
-  // Open modal
-  async function openSearch() {
-    searchModal.classList.remove('hidden');
-    // small delay for transition
-    setTimeout(() => {
-      searchModal.classList.remove('opacity-0');
-      searchInput.focus();
-    }, 10);
+  document.addEventListener('astro:page-load', () => {
+    const searchModal = document.getElementById('search-modal');
+    if (!searchModal) return; // Prevent errors if modal isn't on the page
     
-    // Fetch data in background when opened
-    await fetchSearchData();
-  }
+    const searchBackdrop = document.getElementById('search-backdrop');
+    const searchInput = document.getElementById('search-input');
+    const searchResults = document.getElementById('search-results');
+    const searchEmpty = document.getElementById('search-empty');
+    const searchCloseBtn = document.getElementById('search-close-btn');
 
-  // Close modal
-  function closeSearch() {
-    searchModal.classList.add('opacity-0');
-    setTimeout(() => {
-      searchModal.classList.add('hidden');
-      searchInput.value = '';
-      searchResults.innerHTML = '';
-      searchResults.classList.add('hidden');
-      searchEmpty.classList.remove('hidden');
-      searchEmpty.textContent = 'Type to start searching...';
-    }, 300);
-  }
+    // Fetch search data only once per session
+    async function fetchSearchData() {
+      if (window.searchDataCache) return;
+      try {
+        const res = await fetch('/api/search.json');
+        window.searchDataCache = await res.json();
+      } catch (e) {
+        console.error('Failed to fetch search data', e);
+      }
+    }
 
-  // Handle Search logic
-  function handleSearch(e) {
-    const query = e.target.value.toLowerCase().trim();
+    // Open modal
+    async function openSearch() {
+      searchModal.classList.remove('hidden');
+      // small delay for transition
+      setTimeout(() => {
+        searchModal.classList.remove('opacity-0');
+        searchInput.focus();
+      }, 10);
+      
+      // Fetch data in background when opened
+      await fetchSearchData();
+    }
+
+    // Close modal
+    function closeSearch() {
+      searchModal.classList.add('opacity-0');
+      setTimeout(() => {
+        searchModal.classList.add('hidden');
+        searchInput.value = '';
+        searchResults.innerHTML = '';
+        searchResults.classList.add('hidden');
+        searchEmpty.classList.remove('hidden');
+        searchEmpty.textContent = 'Type to start searching...';
+      }, 300);
+    }
+
+    // Handle Search logic
+    function handleSearch(e) {
+      const query = e.target.value.toLowerCase().trim();
+      
+      if (!query) {
+        searchResults.innerHTML = '';
+        searchResults.classList.add('hidden');
+        searchEmpty.classList.remove('hidden');
+        searchEmpty.textContent = 'Type to start searching...';
+        return;
+      }
+
+      if (!window.searchDataCache) {
+        searchEmpty.textContent = 'Loading...';
+        return;
+      }
+
+      // Filter data
+      const results = window.searchDataCache.filter(post => 
+        post.title.toLowerCase().includes(query) || 
+        post.description.toLowerCase().includes(query) ||
+        post.category.toLowerCase().includes(query) ||
+        post.tags.some(tag => tag.toLowerCase().includes(query))
+      );
+
+      if (results.length === 0) {
+        searchResults.innerHTML = '';
+        searchResults.classList.add('hidden');
+        searchEmpty.classList.remove('hidden');
+        searchEmpty.textContent = 'No results found for "' + query + '"';
+        return;
+      }
+
+      // Render results
+      searchEmpty.classList.add('hidden');
+      searchResults.classList.remove('hidden');
+      
+      searchResults.innerHTML = results.map(post => `
+        <a href="/blog/${post.slug}" class="block p-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700/50 transition-colors group">
+          <h4 class="text-base font-bold text-gray-900 dark:text-white mb-1 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">${post.title}</h4>
+          <div class="flex items-center gap-2 mb-1">
+            <span class="text-xs font-semibold px-2 py-0.5 rounded bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400">${post.category}</span>
+            ${post.tags.slice(0, 3).map(tag => `<span class="text-xs text-gray-500 dark:text-gray-400">#${tag}</span>`).join('')}
+          </div>
+          <p class="text-sm text-gray-500 dark:text-gray-400 line-clamp-1">${post.description}</p>
+        </a>
+      `).join('');
+    }
+
+    // Attach open event to all triggers (Using global delegate to avoid duplicate listeners)
+    const handleDocumentClick = (e) => {
+      if (e.target.closest('.search-trigger-btn')) {
+        openSearch();
+      }
+    };
     
-    if (!query) {
-      searchResults.innerHTML = '';
-      searchResults.classList.add('hidden');
-      searchEmpty.classList.remove('hidden');
-      searchEmpty.textContent = 'Type to start searching...';
-      return;
-    }
+    // Remove old listeners to prevent duplicates on page navigation
+    document.removeEventListener('click', window._searchClickHandler);
+    window._searchClickHandler = handleDocumentClick;
+    document.addEventListener('click', window._searchClickHandler);
 
-    if (!searchData) {
-      searchEmpty.textContent = 'Loading...';
-      return;
-    }
+    // Event Listeners
+    searchCloseBtn?.addEventListener('click', closeSearch);
+    searchBackdrop?.addEventListener('click', closeSearch);
+    searchInput?.addEventListener('input', handleSearch);
 
-    // Filter data
-    const results = searchData.filter(post => 
-      post.title.toLowerCase().includes(query) || 
-      post.description.toLowerCase().includes(query) ||
-      post.category.toLowerCase().includes(query) ||
-      post.tags.some(tag => tag.toLowerCase().includes(query))
-    );
-
-    if (results.length === 0) {
-      searchResults.innerHTML = '';
-      searchResults.classList.add('hidden');
-      searchEmpty.classList.remove('hidden');
-      searchEmpty.textContent = 'No results found for "' + query + '"';
-      return;
-    }
-
-    // Render results
-    searchEmpty.classList.add('hidden');
-    searchResults.classList.remove('hidden');
+    // Keyboard shortcuts
+    const handleKeydown = (e) => {
+      if (e.key === 'Escape' && !searchModal.classList.contains('hidden')) {
+        closeSearch();
+      }
+      // Open on Cmd+K or Ctrl+K
+      if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+        e.preventDefault();
+        openSearch();
+      }
+      // Open on '/' if not in an input
+      if (e.key === '/' && document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'TEXTAREA') {
+        e.preventDefault();
+        openSearch();
+      }
+    };
     
-    searchResults.innerHTML = results.map(post => `
-      <a href="/blog/${post.slug}" class="block p-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700/50 transition-colors group">
-        <h4 class="text-base font-bold text-gray-900 dark:text-white mb-1 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">${post.title}</h4>
-        <div class="flex items-center gap-2 mb-1">
-          <span class="text-xs font-semibold px-2 py-0.5 rounded bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400">${post.category}</span>
-          ${post.tags.slice(0, 3).map(tag => `<span class="text-xs text-gray-500 dark:text-gray-400">#${tag}</span>`).join('')}
-        </div>
-        <p class="text-sm text-gray-500 dark:text-gray-400 line-clamp-1">${post.description}</p>
-      </a>
-    `).join('');
-  }
-
-  // Attach open event to all triggers
-  document.addEventListener('click', (e) => {
-    if (e.target.closest('.search-trigger-btn')) {
-      openSearch();
-    }
-  });
-
-  // Event Listeners
-  searchCloseBtn?.addEventListener('click', closeSearch);
-  searchBackdrop?.addEventListener('click', closeSearch);
-  searchInput?.addEventListener('input', handleSearch);
-
-  // Keyboard shortcuts
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && !searchModal.classList.contains('hidden')) {
-      closeSearch();
-    }
-    // Open on Cmd+K or Ctrl+K
-    if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
-      e.preventDefault();
-      openSearch();
-    }
-    // Open on '/' if not in an input
-    if (e.key === '/' && document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'TEXTAREA') {
-      e.preventDefault();
-      openSearch();
-    }
+    document.removeEventListener('keydown', window._searchKeyHandler);
+    window._searchKeyHandler = handleKeydown;
+    document.addEventListener('keydown', window._searchKeyHandler);
   });
 </script>

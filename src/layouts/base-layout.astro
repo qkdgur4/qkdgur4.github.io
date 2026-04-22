@@ -86,16 +86,18 @@ const { title, description, sideBarActiveItemID = 'home' } = Astro.props;
 
     <SearchModal />
     <script>
-      const btn = document.getElementById('mobile-menu-btn');
-      const closeBtn = document.getElementById('mobile-close-btn');
-      const drawer = document.getElementById('mobile-drawer');
+      document.addEventListener('astro:page-load', () => {
+        const btn = document.getElementById('mobile-menu-btn');
+        const closeBtn = document.getElementById('mobile-close-btn');
+        const drawer = document.getElementById('mobile-drawer');
 
-      btn?.addEventListener('click', () => {
-        drawer?.classList.remove('translate-x-full');
-      });
+        btn?.addEventListener('click', () => {
+          drawer?.classList.remove('translate-x-full');
+        });
 
-      closeBtn?.addEventListener('click', () => {
-        drawer?.classList.add('translate-x-full');
+        closeBtn?.addEventListener('click', () => {
+          drawer?.classList.add('translate-x-full');
+        });
       });
     </script>
   </body>
