@@ -86,6 +86,15 @@ const { title, description, sideBarActiveItemID = 'home' } = Astro.props;
 
     <SearchModal />
     <script>
+      // Preserve theme across view transitions
+      document.addEventListener('astro:after-swap', () => {
+        if (localStorage.getItem('theme') === 'light') {
+          document.documentElement.classList.remove('dark');
+        } else {
+          document.documentElement.classList.add('dark');
+        }
+      });
+
       document.addEventListener('astro:page-load', () => {
         const btn = document.getElementById('mobile-menu-btn');
         const closeBtn = document.getElementById('mobile-close-btn');
