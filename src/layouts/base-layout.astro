@@ -10,7 +10,7 @@ import '../styles/global.css';
 interface Props {
   title: string;
   description: string;
-  sideBarActiveItemID?: 'home' | 'projects' | 'blog' | 'tags' | 'about';
+  sideBarActiveItemID?: 'home' | 'projects' | 'blog' | 'categories' | 'archives' | 'tags' | 'about';
 }
 
 const { title, description, sideBarActiveItemID = 'home' } = Astro.props;
@@ -41,7 +41,7 @@ const { title, description, sideBarActiveItemID = 'home' } = Astro.props;
   <body class="bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 min-h-screen antialiased transition-colors duration-300 selection:bg-blue-500/30 selection:text-blue-200">
     <!-- Mobile Header -->
     <div class="lg:hidden w-full bg-white/90 dark:bg-gray-900/90 backdrop-blur-md border-b border-gray-200 dark:border-gray-800 p-4 sticky top-0 z-50 flex items-center justify-between transition-colors duration-300">
-      <a href="/" class="text-xl font-bold text-gray-900 dark:text-white">DevBlog</a>
+      <a href="/" class="text-xl font-bold text-gray-900 dark:text-white">qkdgur4</a>
       <div class="flex items-center gap-4">
         <TopRightHeader />
         <button id="mobile-menu-btn" class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white">

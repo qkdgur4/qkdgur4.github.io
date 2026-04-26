@@ -9,14 +9,12 @@ import mdx from '@astrojs/mdx';
 export default defineConfig({
   site: 'https://qkdgur4.github.io',
   vite: {
-    plugins: [tailwindcss()]
+    plugins: [tailwindcss()],
   },
-
   integrations: [sitemap(), mdx()],
-
   markdown: {
     shikiConfig: {
-      theme: 'github-dark', // 다크모드 기반 가독성 높은 코드 하이라이팅
+      theme: 'github-dark',
       wrap: true,
     },
   },

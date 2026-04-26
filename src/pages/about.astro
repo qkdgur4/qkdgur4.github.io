@@ -2,28 +2,51 @@
 import BaseLayout from '../layouts/base-layout.astro';
 ---
 
-<BaseLayout title="About Me | DevBlog" description="About the author." sideBarActiveItemID="about">
+<BaseLayout title="About | qkdgur4" description="About qkdgur4 and the engineering notes behind this blog." sideBarActiveItemID="about">
   <div class="py-12">
-    <header class="mb-12">
-      <h1 class="text-4xl font-extrabold text-gray-900 dark:text-white mb-4 transition-colors">About Me</h1>
+    <header class="mb-10 max-w-3xl">
+      <p class="mb-3 text-sm font-bold uppercase tracking-widest text-blue-600 dark:text-blue-300">About qkdgur4</p>
+      <h1 class="mb-4 text-4xl font-extrabold text-gray-900 transition-colors dark:text-white">A practical engineering workbench.</h1>
+      <p class="text-lg leading-relaxed text-gray-600 transition-colors dark:text-gray-300">
+        I use this site to collect projects, implementation notes, and decisions from backend, infrastructure, simulation, and game-service experiments.
+      </p>
     </header>
-    
+
     <article class="prose prose-blue dark:prose-invert max-w-none transition-colors">
-      <p class="text-xl text-gray-600 dark:text-gray-300 leading-relaxed mb-8 transition-colors">
-        Welcome Hyuk's blog, a Software Engineer and Entrepreneur passionate about building scalable cloud architectures, optimizing backend infrastructures, and crafting premium user experiences.
+      <p class="text-xl leading-relaxed text-gray-600 transition-colors dark:text-gray-300">
+        The direction is simple: build small systems seriously, write down the tradeoffs, and keep improving the path from idea to running service.
       </p>
 
-      <h2>Experience</h2>
-      <ul class="space-y-4">
-        <li>
-          <strong>Senior Backend Engineer</strong> - Tech Corp (2022 - Present)
-          <p class="text-gray-500 dark:text-gray-400 mt-1 transition-colors">Leading the backend infrastructure team, managing AWS deployments, and optimizing high-concurrency systems.</p>
-        </li>
-        <li>
-          <strong>Software Engineer</strong> - Startup Inc (2019 - 2022)
-          <p class="text-gray-500 dark:text-gray-400 mt-1 transition-colors">Developed hyper-casual games and built automated CI/CD pipelines.</p>
-        </li>
+      <h2>What this blog is for</h2>
+      <ul>
+        <li>Project write-ups that explain the problem, architecture, and result.</li>
+        <li>Technical notes from working with Astro, TypeScript, AWS, backend flows, and automation.</li>
+        <li>Experiments around simulation, game backends, and product ideas that need real infrastructure.</li>
       </ul>
+
+      <h2>Working style</h2>
+      <ul>
+        <li>Start from a concrete problem instead of a fashionable stack.</li>
+        <li>Prefer small, working releases over large unfinished rewrites.</li>
+        <li>Measure cost, deployment friction, and maintenance effort early.</li>
+        <li>Write notes that future-me can actually use.</li>
+      </ul>
+
+      <h2>Current focus</h2>
+      <div class="not-prose grid gap-4 md:grid-cols-3">
+        <div class="rounded-lg border border-gray-200 bg-white/70 p-4 dark:border-gray-800 dark:bg-gray-900/70">
+          <strong class="text-gray-950 dark:text-white">Backend systems</strong>
+          <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">APIs, data flow, service boundaries, and reliability habits.</p>
+        </div>
+        <div class="rounded-lg border border-gray-200 bg-white/70 p-4 dark:border-gray-800 dark:bg-gray-900/70">
+          <strong class="text-gray-950 dark:text-white">Infrastructure</strong>
+          <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">Deployment, automation, cost awareness, and operational clarity.</p>
+        </div>
+        <div class="rounded-lg border border-gray-200 bg-white/70 p-4 dark:border-gray-800 dark:bg-gray-900/70">
+          <strong class="text-gray-950 dark:text-white">Simulation</strong>
+          <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">Turning assumptions into repeatable experiments and reports.</p>
+        </div>
+      </div>
 
       <h2>Skills</h2>
       <div class="flex flex-wrap gap-2 mt-4">
@@ -32,6 +55,7 @@ import BaseLayout from '../layouts/base-layout.astro';
         <span class="px-3 py-1 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-lg border border-gray-200 dark:border-gray-700 transition-colors">Astro</span>
         <span class="px-3 py-1 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-lg border border-gray-200 dark:border-gray-700 transition-colors">AWS</span>
         <span class="px-3 py-1 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-lg border border-gray-200 dark:border-gray-700 transition-colors">Docker</span>
+        <span class="px-3 py-1 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-lg border border-gray-200 dark:border-gray-700 transition-colors">CI/CD</span>
       </div>
     </article>
   </div>

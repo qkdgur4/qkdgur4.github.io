@@ -2,78 +2,129 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/base-layout.astro';
 import PostCard from '../components/post-card.astro';
-import HorizontalCard from '../components/horizontal-card.astro';
+import ProjectCard from '../components/project-card.astro';
 
-// Get all posts and sort them by date (newest first)
 const posts = await getCollection('blog', ({ data }) => !data.draft);
 const sortedPosts = posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 const recentPosts = sortedPosts.slice(0, 3);
+
+const featuredProjects = [
+  {
+    title: 'Seoul Simulator',
+    eyebrow: 'Simulation / Local Business',
+    summary: 'A concurrent simulation concept for comparing franchise-location scenarios and turning rough assumptions into readable reports.',
+    problem: 'Location decisions need many traffic, revenue, and competition assumptions to be compared quickly.',
+    build: 'Model scenario flows with LangGraph-style orchestration, persistent data, and repeatable report generation.',
+    result: 'Designed around comparable outputs instead of one-off guesses, so decisions can be reviewed and improved.',
+    stack: ['TypeScript', 'Python', 'LangGraph', 'AWS RDS'],
+    links: [
+      { label: 'Write-up', href: '/projects' },
+      { label: 'Demo soon' },
+    ],
+    featured: true,
+  },
+  {
+    title: 'Slime Factory',
+    eyebrow: 'Game Backend / Cost Control',
+    summary: 'A small game/backend experiment focused on keeping gameplay loops fast while reducing infrastructure waste.',
+    problem: 'Game experiments can become expensive when backend jobs, assets, and deployments are not controlled.',
+    build: 'Shape the backend around lean services, deployment automation, and measurable operating cost.',
+    result: 'Turned the project into a cost-aware engineering case instead of only a gameplay prototype.',
+    stack: ['Node.js', 'AWS', 'CI/CD', 'Game Backend'],
+    links: [
+      { label: 'Case study', href: '/projects' },
+      { label: 'Source soon' },
+    ],
+  },
+];
 ---
 
-<BaseLayout title="Bang Hyuk | Portfolio" description="Software Engineer and Entrepreneur" sideBarActiveItemID="home">
-  <!-- Hero Section -->
-  <div class="pb-12 mt-5">
-    <div class="text-xl py-1 text-gray-600 dark:text-gray-400 font-medium tracking-wide">Hey there 👋</div>
-    <div class="text-5xl lg:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-emerald-500 dark:from-blue-400 dark:to-emerald-400 my-2">
-      I'm Bang Hyuk
-    </div>
-    <div class="text-2xl lg:text-3xl py-3 font-bold text-gray-900 dark:text-white">
-      Software Engineer
-    </div>
-    <div class="py-4">
-      <p class="text-lg text-gray-600 dark:text-gray-400 max-w-2xl leading-relaxed">
-        This is a premium hybrid portfolio built with <b>Astro 6</b> and <b>Tailwind CSS v4</b>. 
-        It combines beautiful glassmorphism gradients with a solid sidebar UX to present projects and technical articles effectively.
+<BaseLayout title="qkdgur4 | Working Services Portfolio" description="Backend, infrastructure, simulation, and game-backend notes by qkdgur4." sideBarActiveItemID="home">
+  <section class="grid gap-8 pb-14 pt-6 lg:grid-cols-[1.2fr_0.8fr] lg:items-center">
+    <div>
+      <p class="mb-4 inline-flex rounded-md border border-blue-200 bg-blue-50 px-3 py-1 text-xs font-bold uppercase tracking-widest text-blue-700 dark:border-blue-500/30 dark:bg-blue-500/10 dark:text-blue-300">
+        Backend / Infra / Simulation
       </p>
+      <h1 class="text-4xl font-extrabold leading-tight text-gray-950 dark:text-white sm:text-5xl lg:text-6xl">
+        I turn complex ideas into working services.
+      </h1>
+      <p class="mt-6 max-w-2xl text-lg leading-relaxed text-gray-600 dark:text-gray-300">
+        qkdgur4 builds and documents practical software: backend systems, deployment flows, simulation experiments, and game-service ideas that need to move from sketch to runtime.
+      </p>
+
+      <div class="mt-8 flex flex-wrap gap-3">
+        <a href="/projects" class="rounded-lg bg-blue-600 px-5 py-3 text-sm font-bold text-white shadow-lg shadow-blue-500/20 transition-colors hover:bg-blue-500">
+          View Projects
+        </a>
+        <a href="/blog" class="rounded-lg border border-gray-300 px-5 py-3 text-sm font-bold text-gray-800 transition-colors hover:border-blue-500 hover:text-blue-600 dark:border-gray-700 dark:text-gray-100 dark:hover:border-blue-400 dark:hover:text-blue-300">
+          Read Blog
+        </a>
+        <a href="https://github.com/qkdgur4" target="_blank" rel="noopener noreferrer" class="rounded-lg border border-gray-300 px-5 py-3 text-sm font-bold text-gray-800 transition-colors hover:border-emerald-500 hover:text-emerald-600 dark:border-gray-700 dark:text-gray-100 dark:hover:border-emerald-400 dark:hover:text-emerald-300">
+          GitHub
+        </a>
+      </div>
     </div>
-    <div class="mt-8 flex gap-4">
-      <a href="mailto:contact@example.com" class="px-6 py-3 rounded-lg bg-blue-600 hover:bg-blue-500 text-white font-semibold transition-colors shadow-lg shadow-blue-500/20">
-        Let's connect!
-      </a>
-      <a href="https://github.com/qkdgur4" target="_blank" class="px-6 py-3 rounded-lg bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-900 dark:text-white font-semibold transition-colors border border-gray-300 dark:border-gray-700">
-        GitHub Profile
-      </a>
-    </div>
-  </div>
+
+    <aside class="rounded-lg border border-gray-200 bg-white/80 p-5 shadow-xl shadow-gray-900/5 dark:border-gray-800 dark:bg-gray-950/80 dark:shadow-black/20">
+      <div class="mb-4 flex items-center justify-between border-b border-gray-200 pb-3 dark:border-gray-800">
+        <span class="text-sm font-bold text-gray-900 dark:text-white">Now Building</span>
+        <span class="rounded-full bg-emerald-100 px-2 py-1 text-xs font-bold text-emerald-700 dark:bg-emerald-500/10 dark:text-emerald-300">active</span>
+      </div>
+      <div class="space-y-3 font-mono text-sm">
+        <div class="flex items-start gap-3">
+          <span class="text-blue-500">$</span>
+          <p class="text-gray-700 dark:text-gray-300">ship portfolio with clearer project stories</p>
+        </div>
+        <div class="flex items-start gap-3">
+          <span class="text-blue-500">$</span>
+          <p class="text-gray-700 dark:text-gray-300">study service design through simulation and backend experiments</p>
+        </div>
+        <div class="flex items-start gap-3">
+          <span class="text-blue-500">$</span>
+          <p class="text-gray-700 dark:text-gray-300">write down the tradeoffs, not just the finished code</p>
+        </div>
+      </div>
+      <div class="mt-5 grid grid-cols-2 gap-3 text-sm">
+        <div class="rounded-md border border-gray-200 p-3 dark:border-gray-800">
+          <div class="font-bold text-gray-950 dark:text-white">Focus</div>
+          <div class="text-gray-500 dark:text-gray-400">runtime-ready ideas</div>
+        </div>
+        <div class="rounded-md border border-gray-200 p-3 dark:border-gray-800">
+          <div class="font-bold text-gray-950 dark:text-white">Mode</div>
+          <div class="text-gray-500 dark:text-gray-400">build, measure, write</div>
+        </div>
+      </div>
+    </aside>
+  </section>
 
   <div class="border-b border-gray-200 dark:border-gray-800 my-8 transition-colors"></div>
 
-  <!-- Projects Section (Horizontal) -->
   <section class="mb-12">
     <div class="flex items-center justify-between mb-8">
-      <h2 class="text-3xl font-bold text-gray-900 dark:text-white flex items-center gap-3 transition-colors">
-        My last projects {"</>"}
+      <h2 class="text-3xl font-bold text-gray-900 dark:text-white transition-colors">
+        Featured Projects
       </h2>
+      <a href="/projects" class="text-sm font-bold text-blue-600 transition-colors hover:text-emerald-600 dark:text-blue-400 dark:hover:text-emerald-300">
+        View cases &rarr;
+      </a>
     </div>
 
     <div class="space-y-6">
-      <HorizontalCard
-        title="Seoul Simulator"
-        img="https://images.unsplash.com/photo-1517430816045-df4b7de11d1d?w=800&q=80"
-        desc="A massive concurrent simulation engine for Mapo-gu franchise analysis using LangGraph and AWS RDS."
-        url="#"
-        badge="NEW"
-      />
-      <HorizontalCard
-        title="Slime Factory"
-        img="https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=800&q=80"
-        desc="A hyper-casual mobile game with optimized backend infrastructure to reduce AWS operational costs by 80%."
-        url="#"
-        badge="FOSS"
-      />
+      {featuredProjects.map((project) => (
+        <ProjectCard {...project} />
+      ))}
     </div>
   </section>
 
   <div class="border-b border-gray-200 dark:border-gray-800 my-12 transition-colors"></div>
 
-  <!-- Blog Section (Grid) -->
   <section class="mb-12">
     <div class="flex items-center justify-between mb-8">
       <h2 class="text-3xl font-bold text-gray-900 dark:text-white transition-colors">
-        Latest from blog
+        Latest Writing
       </h2>
       <a href="/blog" class="text-sm text-blue-600 dark:text-blue-400 hover:text-emerald-500 dark:hover:text-emerald-400 transition-colors font-medium">
-        View all posts →
+        View all posts &rarr;
       </a>
     </div>
 
@@ -82,5 +133,13 @@ const recentPosts = sortedPosts.slice(0, 3);
         <PostCard post={post} />
       ))}
     </div>
+  </section>
+
+  <section class="rounded-lg border border-gray-200 bg-white/60 p-6 dark:border-gray-800 dark:bg-gray-900/60">
+    <p class="text-sm font-bold uppercase tracking-widest text-blue-600 dark:text-blue-300">About Snapshot</p>
+    <h2 class="mt-3 text-2xl font-extrabold text-gray-950 dark:text-white">Building in public, one practical system at a time.</h2>
+    <p class="mt-3 max-w-3xl leading-relaxed text-gray-600 dark:text-gray-300">
+      This blog is a workbench for engineering notes, project decisions, and experiments that connect product ideas with backend reality.
+    </p>
   </section>
 </BaseLayout>

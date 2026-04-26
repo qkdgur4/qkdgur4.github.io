@@ -1,36 +1,65 @@
 ---
 import BaseLayout from '../layouts/base-layout.astro';
-import HorizontalCard from '../components/horizontal-card.astro';
+import ProjectCard from '../components/project-card.astro';
+
+const projects = [
+  {
+    title: 'Seoul Simulator',
+    eyebrow: 'Simulation / Local Business',
+    summary: 'A simulation-oriented project for comparing franchise location scenarios with repeatable assumptions.',
+    problem: 'Choosing a location is hard when traffic, competitors, and revenue assumptions live in scattered notes.',
+    build: 'Structure the workflow as scenario inputs, model execution, persistent data, and generated summaries.',
+    result: 'Creates a clearer path from local-business question to comparable technical report.',
+    stack: ['TypeScript', 'Python', 'LangGraph', 'AWS RDS'],
+    links: [
+      { label: 'Write-up soon' },
+      { label: 'Repository soon' },
+    ],
+    featured: true,
+  },
+  {
+    title: 'Slime Factory',
+    eyebrow: 'Game Backend / Operations',
+    summary: 'A game-service experiment that treats backend cost and deployment flow as part of the product.',
+    problem: 'Small game projects often focus on gameplay first and discover backend waste too late.',
+    build: 'Use lean services, automated deployment habits, and cost-aware infrastructure decisions.',
+    result: 'Frames the project as an engineering case study around speed, cost, and maintainability.',
+    stack: ['Node.js', 'AWS', 'CI/CD', 'Game Backend'],
+    links: [
+      { label: 'Case study soon' },
+      { label: 'Repository soon' },
+    ],
+  },
+  {
+    title: 'qkdgur4.github.io',
+    eyebrow: 'Portfolio / Technical Writing',
+    summary: 'The blog itself: an Astro-based portfolio for documenting projects with clearer context and technical notes.',
+    problem: 'A template-like blog did not explain identity, project value, or current engineering direction clearly.',
+    build: 'Refactor the homepage, project cards, and personal copy around identity, case studies, and writing.',
+    result: 'Turns the site into a living portfolio rather than a static link collection.',
+    stack: ['Astro', 'Tailwind CSS', 'MDX', 'GitHub Pages'],
+    links: [
+      { label: 'Repository', href: 'https://github.com/qkdgur4/qkdgur4.github.io' },
+      { label: 'Roadmap in repo' },
+    ],
+  },
+];
 ---
 
-<BaseLayout title="Projects | DevBlog" description="A collection of my recent projects and open source contributions." sideBarActiveItemID="projects">
+<BaseLayout title="Projects | qkdgur4" description="Case-study style project notes by qkdgur4." sideBarActiveItemID="projects">
   <div class="py-12">
-    <header class="mb-12">
-      <h1 class="text-4xl font-extrabold text-gray-900 dark:text-white mb-4 transition-colors">Projects</h1>
-      <p class="text-gray-600 dark:text-gray-400 text-lg transition-colors">A collection of my recent work and side projects.</p>
+    <header class="mb-10 max-w-3xl">
+      <p class="mb-3 text-sm font-bold uppercase tracking-widest text-blue-600 dark:text-blue-300">Case Studies</p>
+      <h1 class="mb-4 text-4xl font-extrabold text-gray-900 transition-colors dark:text-white">Projects that explain the work behind the link.</h1>
+      <p class="text-lg leading-relaxed text-gray-600 transition-colors dark:text-gray-400">
+        Each project is organized around the problem, build approach, result, and stack so the value is visible before opening another tab.
+      </p>
     </header>
 
     <div class="space-y-6">
-      <HorizontalCard
-        title="Seoul Simulator"
-        img="https://images.unsplash.com/photo-1517430816045-df4b7de11d1d?w=800&q=80"
-        desc="A massive concurrent simulation engine for Mapo-gu franchise analysis using LangGraph and AWS RDS."
-        url="#"
-        badge="NEW"
-      />
-      <HorizontalCard
-        title="Slime Factory"
-        img="https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=800&q=80"
-        desc="A hyper-casual mobile game with optimized backend infrastructure to reduce AWS operational costs by 80%."
-        url="#"
-        badge="FOSS"
-      />
-      <HorizontalCard
-        title="DevBlog Template"
-        img="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&q=80"
-        desc="A premium Astro 6 + Tailwind CSS v4 blog template featuring glassmorphism and view transitions."
-        url="https://github.com/qkdgur4/qkdgur4.github.io"
-      />
+      {projects.map((project) => (
+        <ProjectCard {...project} />
+      ))}
     </div>
   </div>
 </BaseLayout>
