@@ -3,19 +3,55 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/base-layout.astro';
 import PostCard from '../components/post-card.astro';
 import ProjectCard from '../components/project-card.astro';
+import ControlRoomPanel from '../components/control-room-panel.astro';
 
 const posts = await getCollection('blog', ({ data }) => !data.draft);
 const sortedPosts = posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 const recentPosts = sortedPosts.slice(0, 3);
 
+const writingQueue = [
+  {
+    title: 'Control-room portfolio refactor',
+    description: '홈페이지를 프로젝트, 글, 현재 작업 신호가 한 번에 보이는 기술 블로그 구조로 바꾸는 중입니다.',
+    category: 'Portfolio',
+    tags: ['Astro', 'UI', 'Writing'],
+    href: '/projects',
+    date: '2026.04.26',
+  },
+  {
+    title: 'Simulation project notes',
+    description: '입지, 매출, 트래픽 가정을 반복 가능한 시나리오와 보고서 형태로 정리하는 실험을 설계합니다.',
+    category: 'Simulation',
+    tags: ['LangGraph', 'AWS', 'Backend'],
+    href: '/projects',
+    date: 'writing queue',
+  },
+  {
+    title: 'Game backend cost log',
+    description: '작은 게임 서비스에서도 배포 자동화와 비용 감각을 초기에 붙이는 방법을 기록할 예정입니다.',
+    category: 'Game Backend',
+    tags: ['AWS', 'CI/CD', 'Ops'],
+    href: '/projects',
+    date: 'draft',
+  },
+];
+
 const featuredProjects = [
   {
     title: 'Seoul Simulator',
     eyebrow: 'Simulation / Local Business',
-    summary: 'A concurrent simulation concept for comparing franchise-location scenarios and turning rough assumptions into readable reports.',
-    problem: 'Location decisions need many traffic, revenue, and competition assumptions to be compared quickly.',
-    build: 'Model scenario flows with LangGraph-style orchestration, persistent data, and repeatable report generation.',
-    result: 'Designed around comparable outputs instead of one-off guesses, so decisions can be reviewed and improved.',
+    summary: '프랜차이즈 입지 가정을 여러 시나리오로 돌려보고, 비교 가능한 보고서로 남기는 시뮬레이션 프로젝트입니다.',
+    status: 'Building',
+    role: 'Simulation / Backend',
+    problem: '상권, 유동 인구, 경쟁 매장, 매출 가정이 흩어져 있으면 입지 판단을 반복 검증하기 어렵습니다.',
+    build: '시나리오 입력, LangGraph 스타일 실행 흐름, 영속 데이터, 보고서 생성을 하나의 파이프라인으로 설계합니다.',
+    result: '감으로 고르는 선택지를 비교 가능한 출력물로 바꿔 다음 실험과 의사결정에 다시 사용할 수 있게 만듭니다.',
+    evidence: ['Scenario -> model -> report 흐름을 다이어그램으로 정리', 'LangGraph, AWS RDS 기반 구현 메모를 글감으로 관리'],
+    visual: {
+      src: '/projects/seoul-simulator-flow.svg',
+      alt: 'Seoul Simulator architecture flow diagram',
+      caption: 'Architecture diagram, screenshot pending',
+    },
     stack: ['TypeScript', 'Python', 'LangGraph', 'AWS RDS'],
     links: [
       { label: 'Write-up', href: '/projects' },
@@ -26,10 +62,18 @@ const featuredProjects = [
   {
     title: 'Slime Factory',
     eyebrow: 'Game Backend / Cost Control',
-    summary: 'A small game/backend experiment focused on keeping gameplay loops fast while reducing infrastructure waste.',
-    problem: 'Game experiments can become expensive when backend jobs, assets, and deployments are not controlled.',
-    build: 'Shape the backend around lean services, deployment automation, and measurable operating cost.',
-    result: 'Turned the project into a cost-aware engineering case instead of only a gameplay prototype.',
+    summary: '게임 루프를 빠르게 실험하되, 백엔드 비용과 배포 흐름을 초기에 함께 관리하는 게임 서비스 실험입니다.',
+    status: 'Experiment',
+    role: 'Game Backend / Infra',
+    problem: '작은 게임 실험도 배포, 잡 처리, 에셋 관리가 느슨하면 운영 비용과 수정 비용이 빨리 커집니다.',
+    build: '가벼운 서비스 경계, 자동 배포 습관, 비용을 확인할 수 있는 운영 지표를 프로젝트 구조에 포함합니다.',
+    result: '게임 프로토타입을 “재미”뿐 아니라 속도, 비용, 유지보수성까지 기록하는 엔지니어링 케이스로 만듭니다.',
+    evidence: ['Backend loop와 deployment path를 분리한 흐름 다이어그램', '비용 최적화 관점의 케이스 스터디로 확장 예정'],
+    visual: {
+      src: '/projects/slime-factory-flow.svg',
+      alt: 'Slime Factory service flow diagram',
+      caption: 'Service flow diagram, source pending',
+    },
     stack: ['Node.js', 'AWS', 'CI/CD', 'Game Backend'],
     links: [
       { label: 'Case study', href: '/projects' },
@@ -39,25 +83,26 @@ const featuredProjects = [
 ];
 ---
 
-<BaseLayout title="qkdgur4 | Working Services Portfolio" description="Backend, infrastructure, simulation, and game-backend notes by qkdgur4." sideBarActiveItemID="home">
+<BaseLayout title="qkdgur4 | 실행되는 서비스로 바꾸는 개발 기록" description="백엔드, 인프라, 시뮬레이션, 게임 서비스 실험을 실제로 굴러가는 구조로 정리하는 qkdgur4의 기술 블로그입니다." sideBarActiveItemID="home">
   <section class="grid gap-8 pb-14 pt-6 lg:grid-cols-[1.2fr_0.8fr] lg:items-center">
     <div>
       <p class="mb-4 inline-flex rounded-md border border-blue-200 bg-blue-50 px-3 py-1 text-xs font-bold uppercase tracking-widest text-blue-700 dark:border-blue-500/30 dark:bg-blue-500/10 dark:text-blue-300">
         Backend / Infra / Simulation
       </p>
       <h1 class="text-4xl font-extrabold leading-tight text-gray-950 dark:text-white sm:text-5xl lg:text-6xl">
-        I turn complex ideas into working services.
+        아이디어를 실제로 굴러가는 서비스로 바꾸는 개발자, qkdgur4입니다.
       </h1>
       <p class="mt-6 max-w-2xl text-lg leading-relaxed text-gray-600 dark:text-gray-300">
-        qkdgur4 builds and documents practical software: backend systems, deployment flows, simulation experiments, and game-service ideas that need to move from sketch to runtime.
+        백엔드와 인프라를 중심으로 시뮬레이션, 게임 서비스, 자동화 실험을 만들고 그 과정의 선택과 시행착오를 기술 글로 남깁니다.
+        빠른 실험을 배포 가능한 구조로 옮기고, 결과를 다시 읽을 수 있는 기록으로 정리하는 데 관심이 있습니다.
       </p>
 
       <div class="mt-8 flex flex-wrap gap-3">
         <a href="/projects" class="rounded-lg bg-blue-600 px-5 py-3 text-sm font-bold text-white shadow-lg shadow-blue-500/20 transition-colors hover:bg-blue-500">
-          View Projects
+          프로젝트 보기
         </a>
         <a href="/blog" class="rounded-lg border border-gray-300 px-5 py-3 text-sm font-bold text-gray-800 transition-colors hover:border-blue-500 hover:text-blue-600 dark:border-gray-700 dark:text-gray-100 dark:hover:border-blue-400 dark:hover:text-blue-300">
-          Read Blog
+          기술 글 읽기
         </a>
         <a href="https://github.com/qkdgur4" target="_blank" rel="noopener noreferrer" class="rounded-lg border border-gray-300 px-5 py-3 text-sm font-bold text-gray-800 transition-colors hover:border-emerald-500 hover:text-emerald-600 dark:border-gray-700 dark:text-gray-100 dark:hover:border-emerald-400 dark:hover:text-emerald-300">
           GitHub
@@ -65,44 +110,25 @@ const featuredProjects = [
       </div>
     </div>
 
-    <aside class="scanline control-grid rounded-lg border border-gray-200 bg-white/80 p-5 shadow-xl shadow-gray-900/5 dark:border-gray-800 dark:bg-gray-950/80 dark:shadow-black/20">
-      <div class="mb-4 flex items-center justify-between border-b border-gray-200 pb-3 dark:border-gray-800">
-        <span class="text-sm font-bold text-gray-900 dark:text-white">Now Building</span>
-        <span class="rounded-full bg-emerald-100 px-2 py-1 text-xs font-bold text-emerald-700 dark:bg-emerald-500/10 dark:text-emerald-300">active</span>
-      </div>
-      <div class="space-y-3 font-mono text-sm">
-        <div class="flex items-start gap-3">
-          <span class="text-blue-500">$</span>
-          <p class="terminal-caret text-gray-700 dark:text-gray-300">ship portfolio with clearer project stories</p>
-        </div>
-        <div class="flex items-start gap-3">
-          <span class="text-blue-500">$</span>
-          <p class="text-gray-700 dark:text-gray-300">study service design through simulation and backend experiments</p>
-        </div>
-        <div class="flex items-start gap-3">
-          <span class="text-blue-500">$</span>
-          <p class="text-gray-700 dark:text-gray-300">write down the tradeoffs, not just the finished code</p>
-        </div>
-      </div>
-      <div class="mt-5 grid grid-cols-2 gap-x-4 gap-y-3 border-t border-gray-200 pt-4 text-sm dark:border-gray-800">
-        <div>
-          <div class="font-bold text-gray-950 dark:text-white">Focus</div>
-          <div class="text-gray-500 dark:text-gray-400">runtime-ready ideas</div>
-        </div>
-        <div>
-          <div class="font-bold text-gray-950 dark:text-white">Mode</div>
-          <div class="text-gray-500 dark:text-gray-400">build, measure, write</div>
-        </div>
-        <div>
-          <div class="font-bold text-gray-950 dark:text-white">Signal</div>
-          <div class="text-gray-500 dark:text-gray-400">problem to output</div>
-        </div>
-        <div>
-          <div class="font-bold text-gray-950 dark:text-white">Stack</div>
-          <div class="text-gray-500 dark:text-gray-400">backend first</div>
-        </div>
-      </div>
-    </aside>
+    <ControlRoomPanel
+      title="Now Building"
+      commands={[
+        { command: 'portfolio case studies with real evidence', active: true },
+        { command: 'simulation notes from scenario to report' },
+        { command: 'backend experiments with cost and deploy logs' },
+      ]}
+      metrics={[
+        { label: 'case studies', value: '3', tone: 'blue' },
+        { label: 'active experiments', value: '2', tone: 'emerald' },
+        { label: 'writing queue', value: '3', tone: 'cyan' },
+      ]}
+      rows={[
+        { label: 'Focus', value: 'runtime-ready ideas' },
+        { label: 'Mode', value: 'build, measure, write' },
+        { label: 'Signal', value: 'problem to output' },
+        { label: 'Stack', value: 'backend first' },
+      ]}
+    />
   </section>
 
   <div class="border-b border-gray-200 dark:border-gray-800 my-8 transition-colors"></div>
@@ -110,10 +136,49 @@ const featuredProjects = [
   <section class="mb-12">
     <div class="flex items-center justify-between mb-8">
       <h2 class="text-3xl font-bold text-gray-900 dark:text-white transition-colors">
-        Featured Projects
+        Recent Technical Logs
+      </h2>
+      <a href="/blog" class="text-sm font-bold text-blue-600 transition-colors hover:text-emerald-600 dark:text-blue-400 dark:hover:text-emerald-300">
+        전체 글 보기 &rarr;
+      </a>
+    </div>
+
+    {recentPosts.length > 0 ? (
+      <div class="grid gap-6 lg:grid-cols-2">
+        {recentPosts.map((post) => (
+          <PostCard post={post} />
+        ))}
+      </div>
+    ) : (
+      <div class="grid gap-4 lg:grid-cols-3">
+        {writingQueue.map((log) => (
+          <a href={log.href} class="signal-card rounded-lg border border-gray-200 bg-white/70 p-5 transition-all hover:-translate-y-1 hover:border-blue-400 dark:border-gray-800 dark:bg-gray-900/70 dark:hover:border-blue-500">
+            <div class="flex items-center justify-between gap-3">
+              <span class="rounded-md border border-blue-200 bg-blue-50 px-2.5 py-1 text-xs font-bold text-blue-700 dark:border-blue-500/20 dark:bg-blue-500/10 dark:text-blue-300">{log.category}</span>
+              <span class="text-xs font-mono text-gray-500 dark:text-gray-400">{log.date}</span>
+            </div>
+            <h3 class="mt-4 text-lg font-extrabold text-gray-950 dark:text-white">{log.title}</h3>
+            <p class="mt-3 text-sm leading-relaxed text-gray-600 dark:text-gray-300">{log.description}</p>
+            <div class="mt-5 flex flex-wrap gap-2 border-t border-gray-200 pt-4 dark:border-gray-800">
+              {log.tags.map((tag) => (
+                <span class="rounded bg-emerald-100 px-2 py-1 text-xs font-semibold text-emerald-700 dark:bg-emerald-500/10 dark:text-emerald-300">#{tag}</span>
+              ))}
+            </div>
+          </a>
+        ))}
+      </div>
+    )}
+  </section>
+
+  <div class="border-b border-gray-200 dark:border-gray-800 my-12 transition-colors"></div>
+
+  <section class="mb-12">
+    <div class="flex items-center justify-between mb-8">
+      <h2 class="text-3xl font-bold text-gray-900 dark:text-white transition-colors">
+        Featured Case Studies
       </h2>
       <a href="/projects" class="text-sm font-bold text-blue-600 transition-colors hover:text-emerald-600 dark:text-blue-400 dark:hover:text-emerald-300">
-        View cases &rarr;
+        케이스 전체 보기 &rarr;
       </a>
     </div>
 
@@ -126,28 +191,11 @@ const featuredProjects = [
 
   <div class="border-b border-gray-200 dark:border-gray-800 my-12 transition-colors"></div>
 
-  <section class="mb-12">
-    <div class="flex items-center justify-between mb-8">
-      <h2 class="text-3xl font-bold text-gray-900 dark:text-white transition-colors">
-        Latest Writing
-      </h2>
-      <a href="/blog" class="text-sm text-blue-600 dark:text-blue-400 hover:text-emerald-500 dark:hover:text-emerald-400 transition-colors font-medium">
-        View all posts &rarr;
-      </a>
-    </div>
-
-    <div class="grid gap-6 lg:grid-cols-2">
-      {recentPosts.map((post) => (
-        <PostCard post={post} />
-      ))}
-    </div>
-  </section>
-
   <section class="rounded-lg border border-gray-200 bg-white/60 p-6 dark:border-gray-800 dark:bg-gray-900/60">
     <p class="text-sm font-bold uppercase tracking-widest text-blue-600 dark:text-blue-300">About Snapshot</p>
-    <h2 class="mt-3 text-2xl font-extrabold text-gray-950 dark:text-white">Building in public, one practical system at a time.</h2>
+    <h2 class="mt-3 text-2xl font-extrabold text-gray-950 dark:text-white">작게 만들고, 실제로 굴리고, 다시 읽을 수 있게 기록합니다.</h2>
     <p class="mt-3 max-w-3xl leading-relaxed text-gray-600 dark:text-gray-300">
-      This blog is a workbench for engineering notes, project decisions, and experiments that connect product ideas with backend reality.
+      이 블로그는 제품 아이디어를 백엔드 현실과 연결하는 작업대입니다. 문제, 구현, 결과, 다음 실험을 같은 화면에서 따라갈 수 있게 정리합니다.
     </p>
   </section>
 </BaseLayout>

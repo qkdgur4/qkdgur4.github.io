@@ -6,10 +6,18 @@ const projects = [
   {
     title: 'Seoul Simulator',
     eyebrow: 'Simulation / Local Business',
-    summary: 'A simulation-oriented project for comparing franchise location scenarios with repeatable assumptions.',
-    problem: 'Choosing a location is hard when traffic, competitors, and revenue assumptions live in scattered notes.',
-    build: 'Structure the workflow as scenario inputs, model execution, persistent data, and generated summaries.',
-    result: 'Creates a clearer path from local-business question to comparable technical report.',
+    summary: '프랜차이즈 입지 가정을 반복 가능한 시나리오와 보고서로 바꾸는 시뮬레이션 프로젝트입니다.',
+    status: 'Building',
+    role: 'Simulation / Backend',
+    problem: '상권, 경쟁 매장, 유동 인구, 예상 매출 가정이 흩어져 있으면 여러 입지를 같은 기준으로 비교하기 어렵습니다.',
+    build: '시나리오 입력값을 정리하고, 모델 실행과 데이터 저장, 요약 보고서 생성을 하나의 흐름으로 묶습니다.',
+    result: '한 번의 추측이 아니라 다시 돌려볼 수 있는 비교 실험으로 바꿔 입지 판단의 근거를 남깁니다.',
+    evidence: ['Architecture diagram included', 'Scenario/report structure documented as the next write-up target'],
+    visual: {
+      src: '/projects/seoul-simulator-flow.svg',
+      alt: 'Seoul Simulator architecture flow diagram',
+      caption: 'Architecture diagram, real report screenshot pending',
+    },
     stack: ['TypeScript', 'Python', 'LangGraph', 'AWS RDS'],
     links: [
       { label: 'Write-up soon' },
@@ -20,10 +28,18 @@ const projects = [
   {
     title: 'Slime Factory',
     eyebrow: 'Game Backend / Operations',
-    summary: 'A game-service experiment that treats backend cost and deployment flow as part of the product.',
-    problem: 'Small game projects often focus on gameplay first and discover backend waste too late.',
-    build: 'Use lean services, automated deployment habits, and cost-aware infrastructure decisions.',
-    result: 'Frames the project as an engineering case study around speed, cost, and maintainability.',
+    summary: '작은 게임 서비스 실험에서 백엔드 비용, 배포 흐름, 유지보수성을 함께 다루는 프로젝트입니다.',
+    status: 'Experiment',
+    role: 'Game Backend / Infra',
+    problem: '게임 프로토타입은 재미를 먼저 보지만, 배포와 운영 비용을 늦게 보면 실험 속도가 쉽게 떨어집니다.',
+    build: '가벼운 API, 자동 배포 흐름, 비용 확인 지점을 분리해 게임 루프와 운영 루프를 함께 설계합니다.',
+    result: '단순한 게임 아이디어를 속도, 비용, 배포 습관까지 설명하는 백엔드 케이스 스터디로 확장합니다.',
+    evidence: ['Service flow diagram included', 'Cost-control notes marked as the next case-study section'],
+    visual: {
+      src: '/projects/slime-factory-flow.svg',
+      alt: 'Slime Factory backend service flow diagram',
+      caption: 'Service flow diagram, source link pending',
+    },
     stack: ['Node.js', 'AWS', 'CI/CD', 'Game Backend'],
     links: [
       { label: 'Case study soon' },
@@ -33,10 +49,18 @@ const projects = [
   {
     title: 'qkdgur4.github.io',
     eyebrow: 'Portfolio / Technical Writing',
-    summary: 'The blog itself: an Astro-based portfolio for documenting projects with clearer context and technical notes.',
-    problem: 'A template-like blog did not explain identity, project value, or current engineering direction clearly.',
-    build: 'Refactor the homepage, project cards, and personal copy around identity, case studies, and writing.',
-    result: 'Turns the site into a living portfolio rather than a static link collection.',
+    summary: 'Astro 기반 블로그 자체를 기술 기록과 포트폴리오 증거가 함께 보이는 컨트롤룸으로 다듬는 프로젝트입니다.',
+    status: 'Shipped / Improving',
+    role: 'Frontend / Writing System',
+    problem: '템플릿 느낌이 남아 있으면 방문자가 qkdgur4가 무엇을 만들고 어떤 문제를 다루는지 빠르게 알기 어렵습니다.',
+    build: '히어로 문구, 프로젝트 카드, 기술 로그, OG 메타데이터를 한국어 우선의 작업 기록 구조로 재구성합니다.',
+    result: '정적인 링크 모음에서 현재 작업, 케이스 스터디, 글감이 함께 보이는 살아있는 기술 블로그로 바뀝니다.',
+    evidence: ['Live GitHub Pages site', 'Repository link available', 'Control-room UI and project evidence fields implemented'],
+    visual: {
+      src: '/projects/github-blog-control-room.svg',
+      alt: 'qkdgur4 blog control-room information architecture diagram',
+      caption: 'Information architecture diagram',
+    },
     stack: ['Astro', 'Tailwind CSS', 'MDX', 'GitHub Pages'],
     links: [
       { label: 'Repository', href: 'https://github.com/qkdgur4/qkdgur4.github.io' },
@@ -46,13 +70,13 @@ const projects = [
 ];
 ---
 
-<BaseLayout title="Projects | qkdgur4" description="Case-study style project notes by qkdgur4." sideBarActiveItemID="projects">
+<BaseLayout title="Projects | qkdgur4" description="문제, 구현, 결과, 증거를 함께 정리한 qkdgur4의 프로젝트 케이스 스터디입니다." sideBarActiveItemID="projects">
   <div class="py-12">
     <header class="mb-10 max-w-3xl">
       <p class="mb-3 text-sm font-bold uppercase tracking-widest text-blue-600 dark:text-blue-300">Case Studies</p>
-      <h1 class="mb-4 text-4xl font-extrabold text-gray-900 transition-colors dark:text-white">Projects that explain the work behind the link.</h1>
+      <h1 class="mb-4 text-4xl font-extrabold text-gray-900 transition-colors dark:text-white">링크 뒤의 문제, 구현, 결과를 같이 보여주는 프로젝트들.</h1>
       <p class="text-lg leading-relaxed text-gray-600 transition-colors dark:text-gray-400">
-        Each project is organized around the problem, build approach, result, and stack so the value is visible before opening another tab.
+        각 프로젝트는 문제, 역할, 빌드 방식, 결과, 증거를 함께 정리합니다. 아직 실제 스크린샷이 없는 항목은 아키텍처 다이어그램으로 현재 설계를 먼저 보여줍니다.
       </p>
     </header>
 

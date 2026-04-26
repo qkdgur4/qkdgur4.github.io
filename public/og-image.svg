@@ -3,15 +3,15 @@
   <path d="M0 0h1200v630H0z" fill="url(#grid)"/>
   <rect x="72" y="72" width="1056" height="486" rx="28" fill="#111827" stroke="#334155" stroke-width="2"/>
   <text x="112" y="150" fill="#38bdf8" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="28" font-weight="700">qkdgur4 / control-room</text>
-  <text x="112" y="270" fill="#f8fafc" font-family="Inter, Pretendard, Arial, sans-serif" font-size="72" font-weight="800">Working Services Portfolio</text>
-  <text x="116" y="340" fill="#cbd5e1" font-family="Inter, Pretendard, Arial, sans-serif" font-size="34">Backend, infrastructure, simulation, and game-service notes.</text>
+  <text x="112" y="260" fill="#f8fafc" font-family="Inter, Pretendard, Arial, sans-serif" font-size="58" font-weight="800">실행되는 서비스로 바꾸는 개발 기록</text>
+  <text x="116" y="334" fill="#cbd5e1" font-family="Inter, Pretendard, Arial, sans-serif" font-size="32">Backend, infra, simulation, and game-service notes.</text>
   <g transform="translate(112 410)">
     <rect width="220" height="54" rx="10" fill="#1d4ed8"/>
-    <text x="26" y="36" fill="#ffffff" font-family="Inter, Pretendard, Arial, sans-serif" font-size="22" font-weight="700">View Projects</text>
+    <text x="26" y="36" fill="#ffffff" font-family="Inter, Pretendard, Arial, sans-serif" font-size="22" font-weight="700">Projects</text>
   </g>
   <g transform="translate(360 410)">
     <rect width="174" height="54" rx="10" fill="#064e3b"/>
-    <text x="26" y="36" fill="#d1fae5" font-family="Inter, Pretendard, Arial, sans-serif" font-size="22" font-weight="700">Read Blog</text>
+    <text x="26" y="36" fill="#d1fae5" font-family="Inter, Pretendard, Arial, sans-serif" font-size="22" font-weight="700">Tech Logs</text>
   </g>
   <g transform="translate(884 118)">
     <circle cx="0" cy="0" r="8" fill="#34d399"/>

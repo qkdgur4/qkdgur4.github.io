@@ -2,49 +2,49 @@
 import BaseLayout from '../layouts/base-layout.astro';
 ---
 
-<BaseLayout title="About | qkdgur4" description="About qkdgur4 and the engineering notes behind this blog." sideBarActiveItemID="about">
+<BaseLayout title="About | qkdgur4" description="qkdgur4가 백엔드, 인프라, 시뮬레이션 실험을 만들고 기록하는 방식입니다." sideBarActiveItemID="about">
   <div class="py-12">
     <header class="mb-10 max-w-3xl">
       <p class="mb-3 text-sm font-bold uppercase tracking-widest text-blue-600 dark:text-blue-300">About qkdgur4</p>
-      <h1 class="mb-4 text-4xl font-extrabold text-gray-900 transition-colors dark:text-white">A practical engineering workbench.</h1>
+      <h1 class="mb-4 text-4xl font-extrabold text-gray-900 transition-colors dark:text-white">작게 만들고, 실제로 굴리고, 다시 읽을 수 있게 기록합니다.</h1>
       <p class="text-lg leading-relaxed text-gray-600 transition-colors dark:text-gray-300">
-        I use this site to collect projects, implementation notes, and decisions from backend, infrastructure, simulation, and game-service experiments.
+        이 사이트는 백엔드, 인프라, 시뮬레이션, 게임 서비스 실험에서 나온 구현 노트와 선택의 이유를 모아두는 작업대입니다.
       </p>
     </header>
 
     <article class="prose prose-blue dark:prose-invert max-w-none transition-colors">
       <p class="text-xl leading-relaxed text-gray-600 transition-colors dark:text-gray-300">
-        The direction is simple: build small systems seriously, write down the tradeoffs, and keep improving the path from idea to running service.
+        방향은 단순합니다. 작은 시스템도 진지하게 만들고, 트레이드오프를 남기고, 아이디어가 실행되는 서비스가 되는 경로를 계속 개선합니다.
       </p>
 
-      <h2>What this blog is for</h2>
+      <h2>이 블로그가 담는 것</h2>
       <ul>
-        <li>Project write-ups that explain the problem, architecture, and result.</li>
-        <li>Technical notes from working with Astro, TypeScript, AWS, backend flows, and automation.</li>
-        <li>Experiments around simulation, game backends, and product ideas that need real infrastructure.</li>
+        <li>문제, 아키텍처, 결과를 같이 설명하는 프로젝트 회고.</li>
+        <li>Astro, TypeScript, AWS, 백엔드 흐름, 자동화를 다루며 남긴 기술 노트.</li>
+        <li>실제 인프라가 필요한 시뮬레이션, 게임 백엔드, 제품 아이디어 실험.</li>
       </ul>
 
-      <h2>Working style</h2>
+      <h2>작업 방식</h2>
       <ul>
-        <li>Start from a concrete problem instead of a fashionable stack.</li>
-        <li>Prefer small, working releases over large unfinished rewrites.</li>
-        <li>Measure cost, deployment friction, and maintenance effort early.</li>
-        <li>Write notes that future-me can actually use.</li>
+        <li>유행하는 스택보다 먼저 풀어야 할 구체적인 문제를 잡습니다.</li>
+        <li>큰 미완성 리라이트보다 작게 동작하는 릴리스를 선호합니다.</li>
+        <li>비용, 배포 마찰, 유지보수 부담을 초기에 확인합니다.</li>
+        <li>미래의 제가 실제로 다시 쓸 수 있는 노트를 남깁니다.</li>
       </ul>
 
-      <h2>Current focus</h2>
+      <h2>현재 집중하는 것</h2>
       <div class="not-prose grid gap-4 md:grid-cols-3">
         <div class="rounded-lg border border-gray-200 bg-white/70 p-4 dark:border-gray-800 dark:bg-gray-900/70">
           <strong class="text-gray-950 dark:text-white">Backend systems</strong>
-          <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">APIs, data flow, service boundaries, and reliability habits.</p>
+          <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">API, 데이터 흐름, 서비스 경계, 안정적인 운영 습관.</p>
         </div>
         <div class="rounded-lg border border-gray-200 bg-white/70 p-4 dark:border-gray-800 dark:bg-gray-900/70">
           <strong class="text-gray-950 dark:text-white">Infrastructure</strong>
-          <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">Deployment, automation, cost awareness, and operational clarity.</p>
+          <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">배포, 자동화, 비용 감각, 운영 상태가 보이는 구조.</p>
         </div>
         <div class="rounded-lg border border-gray-200 bg-white/70 p-4 dark:border-gray-800 dark:bg-gray-900/70">
           <strong class="text-gray-950 dark:text-white">Simulation</strong>
-          <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">Turning assumptions into repeatable experiments and reports.</p>
+          <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">가정을 반복 가능한 실험과 보고서로 바꾸는 방식.</p>
         </div>
       </div>
 

@@ -217,6 +217,267 @@ Done when:
 5. Add the signature terminal/status interaction.
 6. Clean SEO, OG, favicon, and old docs encoding.
 
+## 9+ Quality Target
+
+The site should not aim for a theoretical `10/10` blog. The practical target is to become a memorable `9+` portfolio/blog across four axes:
+
+| Axis | Current Estimate | Target | What Must Change |
+| --- | ---: | ---: | --- |
+| Basic completeness | 7/10 | 9/10 | Tight layout, no broken metadata, good mobile behavior, clear navigation, no placeholder content |
+| Personality | 5.5/10 | 9/10 | Korean-first Hero copy, stronger qkdgur4 voice, control-room concept used as information structure |
+| Portfolio persuasion | 6.5/10 | 9/10 | Real proof: screenshots, diagrams, GitHub links, result numbers, role clarity |
+| Technical blog feeling | 6/10 | 9/10 | Recent technical notes should feel central, not secondary to portfolio cards |
+
+### Cold Design Diagnosis
+
+The current site is much better than the original template-like version, but it still sits between a customized portfolio template and a memorable personal technical blog.
+
+What works:
+
+- The qkdgur4 identity is now visible.
+- `Backend / Infra / Simulation` gives a clearer technical direction.
+- `Now Building` creates a stronger first impression.
+- `Problem / Build / Result / Stack` makes projects easier to understand.
+
+What still feels weak:
+
+- The Hero copy is clean but too generic and English-heavy.
+- The control-room concept is currently a visual layer, not the full information architecture.
+- Featured projects still lack real evidence.
+- The main page still reads more like a portfolio with a blog section than a technical blog with strong project proof.
+- The color system is stable but not yet uniquely qkdgur4.
+
+## Next Improvement Plan: Move From 7-ish to 9+
+
+### Phase 6. Rewrite Hero in Korean-First Voice
+
+Goal:
+
+The Hero should sound like a specific person, not a polished SaaS landing page.
+
+Target files:
+
+- `src/pages/index.astro`
+- `src/components/hero-section.astro`
+- `public/og-image.svg`
+
+Tasks:
+
+- Replace `I turn complex ideas into working services.` with a sharper Korean-first statement.
+- Keep English technical keywords only as supporting labels.
+- Make the first sentence answer: "What kind of engineer is qkdgur4?"
+- Add a short proof line under the Hero: project, stack, and writing direction.
+
+Candidate Hero directions:
+
+```text
+아이디어를 실제로 굴러가는 서비스로 바꾸는 개발자.
+```
+
+```text
+백엔드, 인프라, 시뮬레이션으로 작동하는 제품을 만듭니다.
+```
+
+```text
+실험은 빠르게, 배포는 단단하게, 기록은 솔직하게.
+```
+
+Recommended Hero draft:
+
+```text
+아이디어를 실제로 굴러가는 서비스로 바꾸는 개발자, qkdgur4입니다.
+
+백엔드와 인프라를 중심으로 시뮬레이션, 게임 서비스, 자동화 실험을 만들고
+그 과정의 판단과 시행착오를 기술 글로 남깁니다.
+```
+
+Done when:
+
+- A Korean visitor understands the person and direction within five seconds.
+- The Hero no longer sounds like a generic English portfolio.
+
+### Phase 7. Add Real Project Evidence
+
+Goal:
+
+Projects should feel real before the visitor clicks anything.
+
+Target files:
+
+- `src/pages/index.astro`
+- `src/pages/projects.astro`
+- `src/components/project-card.astro`
+- `public/projects/*` for screenshots or diagrams
+
+Tasks:
+
+- Add one visual proof asset per featured project.
+- Use screenshots if available; otherwise create simple architecture diagrams.
+- Add `Role`, `Status`, and `Evidence` fields to project cards.
+- Replace vague results with measurable or inspectable outcomes.
+- Add real GitHub/demo/write-up links where available.
+
+Evidence types:
+
+- Screenshot of actual UI, terminal output, dashboard, report, or game screen.
+- Architecture diagram showing data flow or service flow.
+- GitHub repository link.
+- Before/after number such as cost, speed, deployment time, scenario count, or error reduction.
+- Blog post explaining implementation decisions.
+
+Project card target structure:
+
+```text
+Title
+One-line value proposition
+
+Status: Building / Shipped / Experiment
+Role: Backend / Infra / Simulation Design
+
+Problem
+Build
+Result
+Evidence
+Stack
+Links
+```
+
+Done when:
+
+- Each project has at least one concrete proof point.
+- No project relies only on a good-sounding description.
+
+### Phase 8. Make Technical Writing Central
+
+Goal:
+
+The site should feel like a technical blog, not only a portfolio.
+
+Target files:
+
+- `src/pages/index.astro`
+- `src/pages/blog/index.astro`
+- `src/components/post-card.astro`
+- `src/content/blog/*`
+
+Tasks:
+
+- Move `Latest Writing` visually closer to the top or make it denser.
+- Add a `Recent Technical Logs` or `Engineering Notes` section.
+- Show tags as technical signals: `Astro`, `AWS`, `Simulation`, `CI/CD`, `Backend`.
+- Add a small `What I learned` or `Tradeoff` preview per post if content supports it.
+- Ensure the blog index has enough information density for scanning.
+
+Homepage structure option:
+
+```text
+Hero
+Control Room Dashboard
+Recent Technical Logs
+Featured Case Studies
+About Snapshot
+```
+
+This structure makes the site read as a technical blog first, with portfolio proof embedded.
+
+Done when:
+
+- Recent writing feels like a primary product of the site.
+- A visitor can quickly tell what topics qkdgur4 actually writes about.
+
+### Phase 9. Turn Control Room Into Information Architecture
+
+Goal:
+
+The control-room concept should organize information, not just decorate cards.
+
+Target files:
+
+- `src/pages/index.astro`
+- `src/styles/global.css`
+- New optional component: `src/components/control-room-panel.astro`
+
+Tasks:
+
+- Create a reusable `ControlRoomPanel` component.
+- Replace isolated decorative effects with dashboard-like sections.
+- Add status rows such as `Current Focus`, `Latest Build`, `Writing Queue`, and `Project Signals`.
+- Use compact metrics only when they are meaningful.
+- Keep the visual language restrained: dense, clear, technical, not flashy.
+
+Possible dashboard modules:
+
+```text
+Current Focus
+- Portfolio case studies
+- Simulation project notes
+- Backend deployment habits
+
+Latest Build
+- Control-room Hero
+- Project card evidence fields
+- OG/social metadata
+
+Project Signals
+- 3 case studies
+- 2 active experiments
+- 1 technical writing queue
+```
+
+Done when:
+
+- The homepage looks organized around status, projects, and writing.
+- The terminal/control-room style is useful even without animations.
+
+### Phase 10. Visual Identity Tightening
+
+Goal:
+
+Make the site recognizable without adding noise.
+
+Target files:
+
+- `src/styles/global.css`
+- `src/components/side-bar.astro`
+- `src/components/project-card.astro`
+- `public/favicon.svg`
+- `public/og-image.svg`
+
+Tasks:
+
+- Define a more intentional visual system around dark navy, cyan, emerald, and neutral gray.
+- Reduce generic gradients where they do not carry meaning.
+- Use repeated structural motifs: status labels, signal lines, terminal rows, compact panels.
+- Improve spacing rhythm between Hero, writing, projects, and About.
+- Make mobile layout feel designed, not merely stacked.
+
+Done when:
+
+- A screenshot of the homepage is recognizable as qkdgur4's site.
+- The design feels technical and personal, not like a default theme.
+
+## New Priority Order
+
+1. Korean-first Hero copy and OG copy.
+2. Control Room Dashboard as actual information structure.
+3. Real project evidence fields and visuals.
+4. Recent Technical Logs section on the homepage.
+5. Project screenshots/diagrams.
+6. Blog index density and post-card preview improvements.
+7. Visual system tightening and mobile polish.
+
+## Recommended Next Commit Scope
+
+The next implementation should stay focused:
+
+- Rewrite Hero and OG copy in Korean-first voice.
+- Add a `ControlRoomPanel` component or dashboard section.
+- Add `Recent Technical Logs` above or near Featured Projects.
+- Extend `ProjectCard` with `status`, `role`, and `evidence`.
+- Use placeholder diagrams only if real screenshots are not available yet, but label them clearly as architecture diagrams.
+
+Do not try to solve everything in one commit. The highest-impact next step is to make the homepage feel like a living technical control room instead of a polished landing page.
+
 ## Recommended First Commit Scope
 
 Start with a small but high-impact pass:
@@ -245,4 +506,13 @@ This scope should noticeably improve the first impression without requiring a fu
 - Enhanced project cards with a subtle signal hover treatment.
 - Replaced the missing default OG image reference with `/og-image.svg`.
 - Added a qkdgur4 favicon and `site.webmanifest`.
+
+### 2026-04-26 Pass 3
+
+- Rewrote the homepage Hero and metadata in a Korean-first voice.
+- Added `src/components/control-room-panel.astro` and moved the Hero status panel into a reusable dashboard component.
+- Moved `Recent Technical Logs` above featured projects and added a writing-queue fallback for empty blog content.
+- Extended project cards with `Status`, `Role`, `Evidence`, and visual proof support.
+- Added architecture diagram placeholders under `public/projects/` for the current featured projects.
+- Rewrote `/projects`, `/about`, `/blog`, and the OG image copy to better match the control-room technical blog direction.
 
