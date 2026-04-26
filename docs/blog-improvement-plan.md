@@ -228,3 +228,21 @@ Start with a small but high-impact pass:
 
 This scope should noticeably improve the first impression without requiring a full redesign. The interaction and visual system can follow as a second pass.
 
+## Progress Log
+
+### 2026-04-26 Pass 1
+
+- Reworked the homepage Hero around qkdgur4's identity.
+- Added a `Now Building` panel to create a stronger first impression.
+- Added `src/components/project-card.astro`.
+- Changed project presentation to `Problem / Build / Result / Stack`.
+- Rewrote the About page to remove fake career/template language.
+- Replaced `DevBlog`, placeholder links, and template copy in source files.
+
+### 2026-04-26 Pass 2
+
+- Added a lightweight control-room visual language with grid, scanline, and caret utilities.
+- Enhanced project cards with a subtle signal hover treatment.
+- Replaced the missing default OG image reference with `/og-image.svg`.
+- Added a qkdgur4 favicon and `site.webmanifest`.
+

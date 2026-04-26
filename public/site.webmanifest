@@ -1,0 +1,16 @@
+{
+  "name": "qkdgur4",
+  "short_name": "qkdgur4",
+  "description": "Backend, infrastructure, simulation, and game-service notes by qkdgur4.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0f172a",
+  "theme_color": "#0f172a",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "128x128",
+      "type": "image/svg+xml"
+    }
+  ]
+}
