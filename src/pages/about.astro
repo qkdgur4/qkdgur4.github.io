@@ -2,13 +2,13 @@
 import BaseLayout from '../layouts/base-layout.astro';
 ---
 
-<BaseLayout title="About | qkdgur4" description="qkdgur4가 백엔드, 인프라, 시뮬레이션 실험을 만들고 기록하는 방식입니다." sideBarActiveItemID="about">
+<BaseLayout title="About | qkdgur4" description="qkdgur4가 백엔드, 인프라, Kubernetes, 관측성 프로젝트를 만들고 기록하는 방식입니다." sideBarActiveItemID="about">
   <div class="py-12">
     <header class="mb-10 max-w-3xl">
       <p class="mb-3 text-sm font-bold uppercase tracking-widest text-blue-600 dark:text-blue-300">About qkdgur4</p>
       <h1 class="mb-4 text-4xl font-extrabold text-gray-900 transition-colors dark:text-white">작게 만들고, 실제로 굴리고, 다시 읽을 수 있게 기록합니다.</h1>
       <p class="text-lg leading-relaxed text-gray-600 transition-colors dark:text-gray-300">
-        이 사이트는 백엔드, 인프라, 시뮬레이션, 게임 서비스 실험에서 나온 구현 노트와 선택의 이유를 모아두는 작업대입니다.
+        이 사이트는 백엔드, 인프라, Kubernetes, 관측성 프로젝트에서 나온 구현 노트와 선택의 이유를 모아두는 작업대입니다.
       </p>
     </header>
 
@@ -21,7 +21,7 @@ import BaseLayout from '../layouts/base-layout.astro';
       <ul>
         <li>문제, 아키텍처, 결과를 같이 설명하는 프로젝트 회고.</li>
         <li>Astro, TypeScript, AWS, 백엔드 흐름, 자동화를 다루며 남긴 기술 노트.</li>
-        <li>실제 인프라가 필요한 시뮬레이션, 게임 백엔드, 제품 아이디어 실험.</li>
+        <li>실제 인프라가 필요한 클라우드 네이티브, 운영 자동화, 제품 아이디어 실험.</li>
       </ul>
 
       <h2>작업 방식</h2>
@@ -43,8 +43,8 @@ import BaseLayout from '../layouts/base-layout.astro';
           <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">배포, 자동화, 비용 감각, 운영 상태가 보이는 구조.</p>
         </div>
         <div class="rounded-lg border border-gray-200 bg-white/70 p-4 dark:border-gray-800 dark:bg-gray-900/70">
-          <strong class="text-gray-950 dark:text-white">Simulation</strong>
-          <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">가정을 반복 가능한 실험과 보고서로 바꾸는 방식.</p>
+          <strong class="text-gray-950 dark:text-white">Observability</strong>
+          <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">메트릭, 로그, 트레이스, AI 분석을 연결하는 운영 흐름.</p>
         </div>
       </div>
 
@@ -54,6 +54,7 @@ import BaseLayout from '../layouts/base-layout.astro';
         <span class="px-3 py-1 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-lg border border-gray-200 dark:border-gray-700 transition-colors">Node.js</span>
         <span class="px-3 py-1 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-lg border border-gray-200 dark:border-gray-700 transition-colors">Astro</span>
         <span class="px-3 py-1 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-lg border border-gray-200 dark:border-gray-700 transition-colors">AWS</span>
+        <span class="px-3 py-1 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-lg border border-gray-200 dark:border-gray-700 transition-colors">Kubernetes</span>
         <span class="px-3 py-1 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-lg border border-gray-200 dark:border-gray-700 transition-colors">Docker</span>
         <span class="px-3 py-1 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-lg border border-gray-200 dark:border-gray-700 transition-colors">CI/CD</span>
       </div>

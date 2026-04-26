@@ -90,20 +90,20 @@ Each project card should include:
 Example project structure:
 
 ```text
-Seoul Simulator
-Concurrent simulation engine for franchise location analysis.
+Alphacar Kubernetes Platform
+Multi-cloud MSA platform with AI-driven observability.
 
 Problem
-Comparing Mapo-gu franchise locations required many assumptions and scenarios to be tested quickly.
+Automotive platform features needed clear service boundaries, repeatable deployment, and reliable observability.
 
 Build
-Built a simulation pipeline with LangGraph agent flows, AWS RDS, and asynchronous job handling.
+Built Next.js and NestJS services on Kubernetes with AWS EKS, GCP GKE, ArgoCD, Terraform, and Grafana stack observability.
 
 Result
-Produced comparable scenario reports for location, revenue, and traffic assumptions.
+Documented a cloud-native operating flow from deployment to metrics, logs, traces, and AI-generated reports.
 
 Stack
-TypeScript / Python / LangGraph / AWS RDS
+Next.js / NestJS / Kubernetes / AWS EKS / GCP GKE / ArgoCD / Terraform / Bedrock
 ```
 
 The homepage should show only two or three featured projects. The full `/projects` page can carry the heavier case-study structure.
