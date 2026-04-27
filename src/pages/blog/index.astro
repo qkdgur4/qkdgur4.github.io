@@ -17,17 +17,17 @@ const tags = [...new Set(posts.map((post) => post.data.tags).flat())].sort();
 const writingQueue = [
   {
     title: 'Alphacar architecture notes',
-    description: '자동차 서비스 플랫폼을 MSA와 Kubernetes 구조로 나누고 운영 흐름을 만든 과정을 정리할 예정입니다.',
+    description: '자동차 서비스 플랫폼을 MSA와 Kubernetes 구조로 나누고 운영 흐름을 만든 과정을 다음에 정리할 주제입니다.',
     tags: ['Kubernetes', 'MSA', 'GitOps'],
   },
   {
     title: 'AI observability log',
-    description: 'Prometheus, Loki, Tempo, AWS Bedrock을 연결해 장애 신호를 분석하고 리포트하는 흐름을 기록할 예정입니다.',
+    description: 'Prometheus, Loki, Tempo, AWS Bedrock을 연결해 장애 신호를 분석하고 리포트하는 흐름을 다음에 정리할 주제입니다.',
     tags: ['Grafana', 'Bedrock', 'Ops'],
   },
   {
     title: 'Control-room portfolio refactor',
-    description: '포트폴리오를 기술 블로그처럼 읽히게 만든 구조 변경과 디자인 결정을 남길 예정입니다.',
+    description: '포트폴리오를 기술 블로그처럼 읽히게 만든 구조 변경과 디자인 결정을 다음에 정리할 주제입니다.',
     tags: ['Astro', 'UI', 'Writing'],
   },
 ];
@@ -59,7 +59,7 @@ const writingQueue = [
           <div class="grid gap-4 md:grid-cols-2">
             {writingQueue.map((item) => (
               <article class="signal-card rounded-lg border border-gray-200 bg-white/70 p-5 dark:border-gray-800 dark:bg-gray-900/70">
-                <p class="text-xs font-bold uppercase tracking-widest text-blue-600 dark:text-blue-300">Writing Queue</p>
+                <p class="text-xs font-bold uppercase tracking-widest text-blue-600 dark:text-blue-300">Next Topic</p>
                 <h2 class="mt-3 text-xl font-extrabold text-gray-950 dark:text-white">{item.title}</h2>
                 <p class="mt-3 text-sm leading-relaxed text-gray-600 dark:text-gray-300">{item.description}</p>
                 <div class="mt-5 flex flex-wrap gap-2 border-t border-gray-200 pt-4 dark:border-gray-800">

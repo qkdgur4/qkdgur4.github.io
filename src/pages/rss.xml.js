@@ -8,8 +8,8 @@ export async function GET(context) {
   const sortedPosts = posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
   return rss({
-    title: 'DevOps Engineer Portfolio Blog',
-    description: 'Building scalable cloud architecture and sharing technical insights.',
+    title: 'qkdgur4 기술 블로그',
+    description: '백엔드, 인프라, Kubernetes, 관측성 프로젝트를 직접 기록하는 qkdgur4의 기술 블로그입니다.',
     site: context.site || 'https://qkdgur4.github.io',
     items: sortedPosts.map((post) => ({
       title: post.data.title,
