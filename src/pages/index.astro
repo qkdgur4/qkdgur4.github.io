@@ -1,13 +1,93 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/base-layout.astro';
-import PostCard from '../components/post-card.astro';
-import ProjectCard from '../components/project-card.astro';
 import ControlRoomPanel from '../components/control-room-panel.astro';
+import HomeProjectCard from '../components/home-project-card.astro';
+import PostCard from '../components/post-card.astro';
 
 const posts = await getCollection('blog', ({ data }) => !data.draft);
 const sortedPosts = posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 const recentPosts = sortedPosts.slice(0, 3);
+
+const profileLinks = [
+  { label: 'Projects', href: '/projects' },
+  { label: 'Blog', href: '/blog' },
+  { label: 'GitHub', href: 'https://github.com/qkdgur4' },
+];
+
+const focusStats = [
+  { label: 'case studies', value: '2' },
+  { label: 'public repos', value: '2+' },
+  { label: 'focus stack', value: 'K8s' },
+];
+
+const aboutPoints = [
+  {
+    title: 'Backend first',
+    description: 'API, 데이터 흐름, 서비스 경계를 먼저 잡고 실제 운영 가능한 형태로 다듬습니다.',
+  },
+  {
+    title: 'Infra aware',
+    description: 'Kubernetes, GitOps, IaC, CI/CD처럼 배포와 운영까지 이어지는 구조를 선호합니다.',
+  },
+  {
+    title: 'Write to reuse',
+    description: '프로젝트의 문제, 선택, 결과를 나중에 다시 읽을 수 있는 기술 기록으로 남깁니다.',
+  },
+];
+
+const homeProjects = [
+  {
+    title: 'Alphacar Kubernetes Platform',
+    summary: '자동차 서비스 플랫폼을 MSA로 나누고, 멀티 클라우드 Kubernetes 환경과 AI 기반 관측성을 함께 구축한 인프라 프로젝트입니다.',
+    status: 'Built',
+    category: 'Cloud Native',
+    date: '2026',
+    role: 'Backend / DevOps / Observability',
+    visual: {
+      src: '/projects/alphacar-k8s-platform.svg',
+      alt: 'Alphacar Kubernetes multi-cloud platform diagram',
+    },
+    stack: ['Kubernetes', 'AWS EKS', 'GCP GKE', 'ArgoCD', 'Bedrock'],
+    links: [
+      { label: 'Case study', href: '/projects' },
+      { label: 'Repository', href: 'https://github.com/qkdgur4/alphacar-k8s' },
+    ],
+    featured: true,
+  },
+  {
+    title: 'qkdgur4.github.io',
+    summary: 'Astro 기반 블로그를 프로젝트 증거, 기술 글, 현재 작업 신호가 함께 보이는 개인 포트폴리오로 다듬는 작업입니다.',
+    status: 'Improving',
+    category: 'Portfolio',
+    date: '2026',
+    role: 'Frontend / Writing System',
+    visual: {
+      src: '/projects/github-blog-control-room.svg',
+      alt: 'qkdgur4 blog control-room information architecture diagram',
+    },
+    stack: ['Astro', 'Tailwind CSS', 'MDX', 'GitHub Pages'],
+    links: [
+      { label: 'Case study', href: '/projects' },
+      { label: 'Repository', href: 'https://github.com/qkdgur4/qkdgur4.github.io' },
+    ],
+  },
+];
+
+const skills = [
+  'TypeScript',
+  'Node.js',
+  'Astro',
+  'AWS',
+  'Kubernetes',
+  'Docker',
+  'Terraform',
+  'ArgoCD',
+  'Prometheus',
+  'Grafana',
+  'Loki',
+  'Bedrock',
+];
 
 const writingQueue = [
   {
@@ -35,66 +115,27 @@ const writingQueue = [
     date: 'next topic',
   },
 ];
-
-const featuredProjects = [
-  {
-    title: 'Alphacar Kubernetes Platform',
-    eyebrow: 'MSA / Kubernetes / AI Observability',
-    summary: '자동차 서비스 플랫폼을 MSA로 나누고, 멀티 클라우드 Kubernetes 환경과 AI 기반 관측성을 함께 구축한 인프라 프로젝트입니다.',
-    status: 'Public / Built',
-    role: 'Cloud Native / DevOps / Backend',
-    problem: '여러 자동차 서비스 기능을 안정적으로 운영하려면 서비스 분리, 배포 자동화, 모니터링, 장애 분석 흐름이 한 구조 안에서 맞물려야 합니다.',
-    build: 'Next.js와 NestJS 기반 애플리케이션을 Kubernetes에 올리고, AWS EKS와 GCP GKE, ArgoCD, Terraform, Prometheus/Grafana/Loki/Tempo, AWS Bedrock을 연결했습니다.',
-    result: '서비스 배포부터 메트릭, 로그, 트레이스 분석과 AI 리포팅까지 이어지는 클라우드 네이티브 운영 흐름을 프로젝트 형태로 정리했습니다.',
-    evidence: ['7개 이상 마이크로서비스를 Kubernetes 환경에서 운영하도록 구성', 'AWS Bedrock 기반 모니터링 분석, Slack 알림, k6 성능 리포트 흐름 포함'],
-    visual: {
-      src: '/projects/alphacar-k8s-platform.svg',
-      alt: 'Alphacar Kubernetes multi-cloud platform diagram',
-      caption: 'MSA, GitOps, observability architecture',
-    },
-    stack: ['Kubernetes', 'AWS EKS', 'GCP GKE', 'ArgoCD', 'Terraform', 'Bedrock'],
-    links: [
-      { label: 'Repository', href: 'https://github.com/qkdgur4/alphacar-k8s' },
-      { label: 'Case study', href: '/projects' },
-    ],
-    featured: true,
-  },
-  {
-    title: 'qkdgur4.github.io',
-    eyebrow: 'Portfolio / Technical Writing',
-    summary: 'Astro 기반 블로그 자체를 기술 기록과 포트폴리오 증거가 함께 보이는 컨트롤룸으로 다듬는 프로젝트입니다.',
-    status: 'Shipped / Improving',
-    role: 'Frontend / Writing System',
-    problem: '템플릿 느낌이 남아 있으면 방문자가 qkdgur4가 무엇을 만들고 어떤 문제를 다루는지 빠르게 알기 어렵습니다.',
-    build: '히어로 문구, 프로젝트 카드, 기술 로그, OG 메타데이터를 한국어 우선의 작업 기록 구조로 재구성합니다.',
-    result: '정적인 링크 모음에서 현재 작업, 케이스 스터디, 글감이 함께 보이는 살아있는 기술 블로그로 바뀝니다.',
-    evidence: ['Live GitHub Pages site', 'Repository link available', 'Control-room UI and project evidence fields implemented'],
-    visual: {
-      src: '/projects/github-blog-control-room.svg',
-      alt: 'qkdgur4 blog control-room information architecture diagram',
-      caption: 'Information architecture diagram',
-    },
-    stack: ['Astro', 'Tailwind CSS', 'MDX', 'GitHub Pages'],
-    links: [
-      { label: 'Repository', href: 'https://github.com/qkdgur4/qkdgur4.github.io' },
-      { label: 'Roadmap in repo' },
-    ],
-  },
-];
 ---
 
 <BaseLayout title="qkdgur4 | 실행되는 서비스로 바꾸는 개발 기록" description="백엔드, 인프라, Kubernetes, AI 관측성 프로젝트를 실제로 굴러가는 구조로 정리하는 qkdgur4의 기술 블로그입니다." sideBarActiveItemID="home">
-  <section class="grid gap-8 pb-14 pt-6 lg:grid-cols-[1.2fr_0.8fr] lg:items-center">
-    <div>
-      <p class="mb-4 inline-flex rounded-md border border-blue-200 bg-blue-50 px-3 py-1 text-xs font-bold uppercase tracking-widest text-blue-700 dark:border-blue-500/30 dark:bg-blue-500/10 dark:text-blue-300">
-        Backend / Infra / Cloud Native
-      </p>
+  <section class="grid gap-8 pb-14 pt-6 lg:grid-cols-[minmax(0,1.15fr)_minmax(18rem,0.85fr)] lg:items-start">
+    <div class="min-w-0">
+      <div class="mb-5 flex flex-wrap items-center gap-3">
+        <span class="inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1 text-xs font-bold text-emerald-700 dark:border-emerald-500/20 dark:bg-emerald-500/10 dark:text-emerald-300">
+          <span class="h-2 w-2 rounded-full bg-emerald-500"></span>
+          Open to build
+        </span>
+        <span class="rounded-full border border-blue-200 bg-blue-50 px-3 py-1 text-xs font-bold uppercase tracking-wide text-blue-700 dark:border-blue-500/20 dark:bg-blue-500/10 dark:text-blue-300">
+          Backend / Infra / Cloud Native
+        </span>
+      </div>
+
       <h1 class="text-4xl font-extrabold leading-tight text-gray-950 dark:text-white sm:text-5xl lg:text-6xl">
-        아이디어를 실제로 굴러가는 서비스로 바꾸는 개발자, qkdgur4입니다.
+        백엔드와 인프라를 실제 서비스로 연결하는 개발자, qkdgur4입니다.
       </h1>
       <p class="mt-6 max-w-2xl text-lg leading-relaxed text-gray-600 dark:text-gray-300">
-        백엔드와 인프라를 중심으로 Kubernetes, GitOps, 관측성, 자동화 실험을 만들고 그 과정의 선택과 시행착오를 기술 글로 남깁니다.
-        빠른 실험을 운영 가능한 구조로 옮기고, 결과를 다시 읽을 수 있는 기록으로 정리하는 데 관심이 있습니다.
+        Kubernetes, GitOps, 관측성, 자동화 실험을 만들고 그 과정의 선택과 시행착오를 글로 남깁니다.
+        아이디어가 동작하는 서비스가 되고, 다시 읽을 수 있는 기록으로 남는 흐름에 관심이 있습니다.
       </p>
 
       <div class="mt-8 flex flex-wrap gap-3">
@@ -108,43 +149,125 @@ const featuredProjects = [
           GitHub
         </a>
       </div>
+
+      <div class="mt-8 grid gap-3 sm:grid-cols-3">
+        {focusStats.map((stat) => (
+          <div class="rounded-lg border border-gray-200 bg-white/70 p-4 dark:border-gray-800 dark:bg-gray-900/70">
+            <div class="font-mono text-xl font-extrabold text-gray-950 dark:text-white">{stat.value}</div>
+            <div class="mt-1 text-xs font-bold uppercase tracking-wide text-gray-500 dark:text-gray-400">{stat.label}</div>
+          </div>
+        ))}
+      </div>
     </div>
 
-    <ControlRoomPanel
-      title="Now Building"
-      commands={[
-        { command: 'portfolio case studies with real evidence', active: true },
-        { command: 'alphacar-k8s as the main infrastructure proof' },
-        { command: 'technical writing from shipped repositories' },
-      ]}
-      metrics={[
-        { label: 'case studies', value: '2', tone: 'blue' },
-        { label: 'real repos', value: '2', tone: 'emerald' },
-        { label: 'next topics', value: '3', tone: 'cyan' },
-      ]}
-      rows={[
-        { label: 'Focus', value: 'runtime-ready ideas' },
-        { label: 'Mode', value: 'build, measure, write' },
-        { label: 'Signal', value: 'problem to output' },
-        { label: 'Stack', value: 'backend first' },
-      ]}
-    />
+    <div class="space-y-4">
+      <aside class="overflow-hidden rounded-lg border border-gray-200 bg-white/80 shadow-xl shadow-gray-900/5 dark:border-gray-800 dark:bg-gray-950/80 dark:shadow-black/20">
+        <div class="relative aspect-[4/3] bg-gray-100 dark:bg-gray-900">
+          <img src="/profile.png" alt="qkdgur4 profile" class="h-full w-full object-cover" />
+          <div class="absolute bottom-4 left-4 rounded-full border border-white/60 bg-white/90 px-3 py-1 text-xs font-bold text-gray-800 shadow-sm backdrop-blur dark:border-gray-700/80 dark:bg-gray-950/80 dark:text-gray-100">
+            Backend / Infra Engineer
+          </div>
+        </div>
+        <div class="p-5">
+          <h2 class="text-2xl font-extrabold text-gray-950 dark:text-white">qkdgur4</h2>
+          <p class="mt-2 text-sm leading-relaxed text-gray-600 dark:text-gray-300">
+            작게 만들고, 실제로 굴리고, 다시 읽을 수 있게 기록합니다.
+          </p>
+          <div class="mt-5 flex flex-wrap gap-2">
+            {profileLinks.map((link) => (
+              <a
+                href={link.href}
+                target={link.href.startsWith('http') ? '_blank' : undefined}
+                rel={link.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                class="rounded-md border border-gray-200 px-3 py-1.5 text-xs font-bold text-gray-700 transition-colors hover:border-blue-400 hover:text-blue-600 dark:border-gray-800 dark:text-gray-200 dark:hover:border-blue-500 dark:hover:text-blue-300"
+              >
+                {link.label}
+              </a>
+            ))}
+          </div>
+        </div>
+      </aside>
+
+      <ControlRoomPanel
+        title="Current Focus"
+        status="shipping"
+        commands={[
+          { command: 'portfolio signal over template noise', active: true },
+          { command: 'case studies backed by real repositories' },
+          { command: 'write the ops decisions, not only the result' },
+        ]}
+        metrics={[
+          { label: 'projects', value: '2', tone: 'blue' },
+          { label: 'repos', value: '2+', tone: 'emerald' },
+          { label: 'topics', value: '3', tone: 'cyan' },
+        ]}
+      />
+    </div>
   </section>
 
-  <div class="border-b border-gray-200 dark:border-gray-800 my-8 transition-colors"></div>
+  <section id="about" class="mb-14 border-t border-gray-200 pt-10 dark:border-gray-800">
+    <div class="mb-6">
+      <p class="text-sm font-bold uppercase tracking-widest text-blue-600 dark:text-blue-300">About</p>
+      <h2 class="mt-2 text-3xl font-extrabold text-gray-950 dark:text-white">문제, 구현, 운영 신호를 함께 보는 개발 기록.</h2>
+    </div>
+    <div class="grid gap-4 md:grid-cols-3">
+      {aboutPoints.map((point) => (
+        <article class="rounded-lg border border-gray-200 bg-white/70 p-5 dark:border-gray-800 dark:bg-gray-900/70">
+          <h3 class="text-lg font-extrabold text-gray-950 dark:text-white">{point.title}</h3>
+          <p class="mt-3 text-sm leading-relaxed text-gray-600 dark:text-gray-300">{point.description}</p>
+        </article>
+      ))}
+    </div>
+  </section>
 
-  <section class="mb-12">
-    <div class="flex items-center justify-between mb-8">
-      <h2 class="text-3xl font-bold text-gray-900 dark:text-white transition-colors">
-        Recent Technical Logs
-      </h2>
+  <section id="projects" class="mb-14 border-t border-gray-200 pt-10 dark:border-gray-800">
+    <div class="mb-8 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+      <div>
+        <div class="flex items-center gap-3">
+          <p class="text-sm font-bold uppercase tracking-widest text-blue-600 dark:text-blue-300">Projects</p>
+          <span class="text-sm font-bold text-gray-500 dark:text-gray-400">({homeProjects.length})</span>
+        </div>
+        <h2 class="mt-2 text-3xl font-extrabold text-gray-950 dark:text-white">링크보다 먼저 맥락이 보이는 프로젝트.</h2>
+      </div>
+      <a href="/projects" class="text-sm font-bold text-blue-600 transition-colors hover:text-emerald-600 dark:text-blue-400 dark:hover:text-emerald-300">
+        케이스 전체 보기 &rarr;
+      </a>
+    </div>
+
+    <div class="grid gap-6 md:grid-cols-2">
+      {homeProjects.map((project) => (
+        <HomeProjectCard {...project} />
+      ))}
+    </div>
+  </section>
+
+  <section id="skills" class="mb-14 border-t border-gray-200 pt-10 dark:border-gray-800">
+    <div class="mb-6">
+      <p class="text-sm font-bold uppercase tracking-widest text-blue-600 dark:text-blue-300">Skills</p>
+      <h2 class="mt-2 text-3xl font-extrabold text-gray-950 dark:text-white">서비스를 굴리는 데 자주 쓰는 도구들.</h2>
+    </div>
+    <div class="flex flex-wrap gap-3">
+      {skills.map((skill) => (
+        <span class="rounded-full border border-gray-200 bg-white/70 px-4 py-2 text-sm font-bold text-gray-700 transition-colors hover:border-blue-300 hover:text-blue-600 dark:border-gray-800 dark:bg-gray-900/70 dark:text-gray-200 dark:hover:border-blue-500 dark:hover:text-blue-300">
+          {skill}
+        </span>
+      ))}
+    </div>
+  </section>
+
+  <section id="blog" class="mb-12 border-t border-gray-200 pt-10 dark:border-gray-800">
+    <div class="mb-8 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+      <div>
+        <p class="text-sm font-bold uppercase tracking-widest text-blue-600 dark:text-blue-300">Blog</p>
+        <h2 class="mt-2 text-3xl font-extrabold text-gray-950 dark:text-white">최근 기술 로그.</h2>
+      </div>
       <a href="/blog" class="text-sm font-bold text-blue-600 transition-colors hover:text-emerald-600 dark:text-blue-400 dark:hover:text-emerald-300">
         전체 글 보기 &rarr;
       </a>
     </div>
 
     {recentPosts.length > 0 ? (
-      <div class="grid gap-6 lg:grid-cols-2">
+      <div class="grid gap-6 lg:grid-cols-3">
         {recentPosts.map((post) => (
           <PostCard post={post} />
         ))}
@@ -155,7 +278,7 @@ const featuredProjects = [
           <a href={log.href} class="signal-card rounded-lg border border-gray-200 bg-white/70 p-5 transition-all hover:-translate-y-1 hover:border-blue-400 dark:border-gray-800 dark:bg-gray-900/70 dark:hover:border-blue-500">
             <div class="flex items-center justify-between gap-3">
               <span class="rounded-md border border-blue-200 bg-blue-50 px-2.5 py-1 text-xs font-bold text-blue-700 dark:border-blue-500/20 dark:bg-blue-500/10 dark:text-blue-300">{log.category}</span>
-              <span class="text-xs font-mono text-gray-500 dark:text-gray-400">{log.date}</span>
+              <span class="font-mono text-xs text-gray-500 dark:text-gray-400">{log.date}</span>
             </div>
             <h3 class="mt-4 text-lg font-extrabold text-gray-950 dark:text-white">{log.title}</h3>
             <p class="mt-3 text-sm leading-relaxed text-gray-600 dark:text-gray-300">{log.description}</p>
@@ -168,34 +291,5 @@ const featuredProjects = [
         ))}
       </div>
     )}
-  </section>
-
-  <div class="border-b border-gray-200 dark:border-gray-800 my-12 transition-colors"></div>
-
-  <section class="mb-12">
-    <div class="flex items-center justify-between mb-8">
-      <h2 class="text-3xl font-bold text-gray-900 dark:text-white transition-colors">
-        Featured Case Studies
-      </h2>
-      <a href="/projects" class="text-sm font-bold text-blue-600 transition-colors hover:text-emerald-600 dark:text-blue-400 dark:hover:text-emerald-300">
-        케이스 전체 보기 &rarr;
-      </a>
-    </div>
-
-    <div class="space-y-6">
-      {featuredProjects.map((project) => (
-        <ProjectCard {...project} />
-      ))}
-    </div>
-  </section>
-
-  <div class="border-b border-gray-200 dark:border-gray-800 my-12 transition-colors"></div>
-
-  <section class="rounded-lg border border-gray-200 bg-white/60 p-6 dark:border-gray-800 dark:bg-gray-900/60">
-    <p class="text-sm font-bold uppercase tracking-widest text-blue-600 dark:text-blue-300">About Snapshot</p>
-    <h2 class="mt-3 text-2xl font-extrabold text-gray-950 dark:text-white">작게 만들고, 실제로 굴리고, 다시 읽을 수 있게 기록합니다.</h2>
-    <p class="mt-3 max-w-3xl leading-relaxed text-gray-600 dark:text-gray-300">
-      이 블로그는 제품 아이디어를 백엔드 현실과 연결하는 작업대입니다. 문제, 구현, 결과, 다음 실험을 같은 화면에서 따라갈 수 있게 정리합니다.
-    </p>
   </section>
 </BaseLayout>
